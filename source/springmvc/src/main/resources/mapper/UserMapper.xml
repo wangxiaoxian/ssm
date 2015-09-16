@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.springmvc.dao.UserDAO">
+         
+         <sql id="allmenbers">
+         id,
+         device_type,
+         device_num,
+         create_time,
+         last_time,
+         state,
+         nickname
+         </sql>
+         
+         <sql id="menberEcpId">
+         device_type,
+         device_num,
+         create_time,
+         last_time,
+         state,
+         nickname
+         </sql>
+         
+         <insert id="insertUser" parameterType="User" keyProperty="id">
+         insert into test_user(
+         user_id,
+         create_time,
+         nickname) 
+         values 
+         (        
+         SEQ_MIGULOTTERY_DOWNLOAD_LOG.nextval,
+         #{createTime},
+         #{nickname})
+         </insert>
+         
+<!--          <delete id="deleteStudent" parameterType="int">
+             delete from users_name where id = #{id}
+         </delete>
+         
+         <update id="updateStudent" parameterType="Student">
+             update users_name set name = #{name} where id = #{id}
+         </update>
+         
+         <select id="queryStudentById" parameterType="int" resultType="Student">
+           select * from users_name where id=#{id}
+         </select> 
+         
+         <select id="queryAllStudents" resultType="Student">
+             select * from users_name
+         </select> -->
+         
+         
+
+</mapper>
