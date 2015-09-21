@@ -15,6 +15,15 @@
     <!-- 扫描controller（controller层注入） -->
    <context:component-scan base-package="cn.springmvc.controller"/>
    
+   <!-- json数据的处理 -->
+   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+		<property name="messageConverters">  
+			<list>  
+				<ref bean="jacksonMessageConverter"/>  
+			</list>  
+		</property>  
+	</bean> 
+   
    <!-- 避免IE在ajax请求时，返回json出现下载 -->
    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">		
 		<property name="supportedMediaTypes">
