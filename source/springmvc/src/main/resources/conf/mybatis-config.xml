@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!-- 命名空间，这里给类名取别名之后，可以再mapper里面使用这个别名而不用写类的全名 -->
+    <!-- 命名空间，这里给类名取别名之后，可以在mapper里面使用这个别名而不用写类的全名 -->
     <typeAliases>
          <typeAlias alias="User" type="cn.springmvc.model.User"/> 
     </typeAliases>
