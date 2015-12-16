@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="mainForm" action="">
+	用户名：<input name="usernmae" type="text"><br>
+	密码：<input name="password" type="password"><br>
+	<button name="submit">提交</button>
+</form>
+</body>
+<script src="common/js/jquery-2.1.4.min.js"></script>
+<script>
+$(function() {
+	
+});
+
+$("button[name='submit']").bind("click", function() {
+	$.ajax({
+		url : "user/login.do",
+		type : "POST",
+		data : {},
+		dataType : "json",
+		beforeSend :function(xhr){},
+		complete : function(xhr,code){},
+		success : function(resp) {
+			alert(resp);
+		}
+	});
+});
+</script>
+</html>
