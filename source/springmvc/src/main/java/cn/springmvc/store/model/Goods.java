@@ -3,7 +3,7 @@
  * cn.springmvc.store.model  
  * Goods.java  
  * wangxiaoxian
- * 2015Äê12ÔÂ15ÈÕ-ÏÂÎç5:52:20
+ * 2015å¹´12æœˆ15æ—¥-ï¿½ï¿½ï¿½ï¿½5:52:20
  */
 package cn.springmvc.store.model;
 
@@ -12,7 +12,7 @@ import java.util.Date;
 /**  
  *   
  * Goods  
- * 2015Äê12ÔÂ15ÈÕ ÏÂÎç5:52:20  
+ * 2015å¹´12æœˆ15æ—¥ ï¿½ï¿½ï¿½ï¿½5:52:20  
  */
 public class Goods {
 	
