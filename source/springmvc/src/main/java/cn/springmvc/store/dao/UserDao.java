@@ -12,6 +12,6 @@ package cn.springmvc.store.dao;
  * UserDao  
  * 2015年12月15日 下午5:48:44  
  */
-public class UserDao {
+public interface UserDao {
 
 }
