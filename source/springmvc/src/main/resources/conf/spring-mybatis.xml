@@ -20,16 +20,16 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
     destroy-method="close" >
 	    <property name="driverClassName">
-	      <value>${oracle.driverClassName}</value>
+	      <value>${db.driverClassName}</value>
 	    </property>
 	    <property name="url">
-	      <value>${oracle.url}</value>
+	      <value>${db.url}</value>
 	    </property>
 	    <property name="username">
-	      <value>${oracle.username}</value>
+	      <value>${db.username}</value>
 	    </property>
 	    <property name="password">
-	      <value>${oracle.password}</value>
+	      <value>${db.password}</value>
 	    </property>
 	    <!-- 连接池最大使用连接数 -->
 	    <property name="maxActive">
@@ -70,15 +70,15 @@
           class="org.mybatis.spring.SqlSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:conf/mybatis-config.xml"
-          p:mapperLocations="classpath:mapper/*.xml"/><!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
+          p:mapperLocations="classpath:cn/springmvc/**/dao/mysql/*.xml"/><!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
       
-   <!-- spring与mybatis整合配置，扫描所有dao -->
-   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-        p:basePackage="cn.springmvc.dao" 
+    <!-- spring与mybatis整合配置，扫描所有dao -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+        p:basePackage="cn.springmvc.**.dao" 
         p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
  
-   <!-- 对数据源进行事务管理 -->
-   <bean id="transactionManager" 
+    <!-- 对数据源进行事务管理 -->
+	<bean id="transactionManager" 
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
         p:dataSource-ref="dataSource"/>
 </beans>

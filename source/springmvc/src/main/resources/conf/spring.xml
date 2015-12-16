@@ -12,7 +12,7 @@
     <context:property-placeholder location="classpath:conf/jdbc.properties"/>
     
     <!-- 扫描文件（自动将servicec层注入） -->
-    <context:component-scan base-package="cn.springmvc.service"/>
+    <context:component-scan base-package="cn.springmvc.**.service"/>
     
     <bean id="jedisConnectionFactory" 
         class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" 
