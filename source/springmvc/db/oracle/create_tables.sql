@@ -20,20 +20,20 @@ tablespace UUC
   );
 -- Add comments to the table 
 comment on table STORE_USER
-  is 'ÓÃ»§±í';
+  is 'ç”¨æˆ·è¡¨';
 -- Add comments to the columns 
 comment on column STORE_USER.user_id
-  is 'ÓÃ»§id';
+  is 'ç”¨æˆ·id';
 comment on column STORE_USER.username
-  is 'ÓÃ»§Ãû';
+  is 'ç”¨æˆ·å';
 comment on column STORE_USER.password
-  is 'ÃÜÂë';
+  is 'å¯†ç ';
 comment on column STORE_USER.nickname
-  is 'êÇ³Æ';
+  is 'æ˜µç§°';
 comment on column STORE_USER.create_time
-  is '´´½¨Ê±¼ä';
+  is 'åˆ›å»ºæ—¶é—´';
 comment on column STORE_USER.update_time
-  is 'ĞŞ¸ÄÊ±¼ä';
+  is 'ä¿®æ”¹æ—¶é—´';
 
 
 -- Create table
@@ -58,20 +58,20 @@ tablespace UUC
   );
 -- Add comments to the table 
 comment on table STORE_PRICE_CHANGE_LOG
-  is '¼Û¸ñ±ä¶¯¼ÇÂ¼±í';
+  is 'ä»·æ ¼å˜åŠ¨è®°å½•è¡¨';
 -- Add comments to the columns 
 comment on column STORE_PRICE_CHANGE_LOG.price_change_log_id
-  is '¼Û¸ñ±ä¶¯¼ÇÂ¼id';
+  is 'ä»·æ ¼å˜åŠ¨è®°å½•id';
 comment on column STORE_PRICE_CHANGE_LOG.goods_id
-  is 'ÉÌÆ·id';
+  is 'å•†å“id';
 comment on column STORE_PRICE_CHANGE_LOG.price
-  is '¼Û¸ñ';
+  is 'ä»·æ ¼';
 comment on column STORE_PRICE_CHANGE_LOG.create_time
-  is '´´½¨Ê±¼ä';
+  is 'åˆ›å»ºæ—¶é—´';
 comment on column STORE_PRICE_CHANGE_LOG.update_time
-  is 'ĞŞ¸ÄÊ±¼ä';
+  is 'ä¿®æ”¹æ—¶é—´';
 comment on column STORE_PRICE_CHANGE_LOG.remark
-  is '±¸×¢';
+  is 'å¤‡æ³¨';
 
 
 -- Create table
@@ -87,7 +87,8 @@ create table STORE_INCOME_LOG
   suplier_id      VARCHAR2(16),
   create_time     DATE,
   update_time     DATE,
-  remark          VARCHAR2(1024)
+  remark          VARCHAR2(1024),
+  quality_time    NUMBER
 )
 tablespace UUC
   pctfree 10
@@ -101,30 +102,32 @@ tablespace UUC
   );
 -- Add comments to the table 
 comment on table STORE_INCOME_LOG
-  is '½ø»õ¼ÇÂ¼±í';
+  is 'è¿›è´§è®°å½•è¡¨';
 -- Add comments to the columns 
 comment on column STORE_INCOME_LOG.income_log_id
   is 'id';
 comment on column STORE_INCOME_LOG.goods_id
-  is 'ÉÌÆ·±àºÅ';
+  is 'å•†å“ç¼–å·';
 comment on column STORE_INCOME_LOG.income_time
-  is '½ø»õÊ±¼ä';
+  is 'è¿›è´§æ—¶é—´';
 comment on column STORE_INCOME_LOG.income_quantity
-  is '½ø»õÊıÁ¿';
+  is 'è¿›è´§æ•°é‡';
 comment on column STORE_INCOME_LOG.quantity_unit
-  is 'ÊıÁ¿µ¥Î»';
+  is 'æ•°é‡å•ä½';
 comment on column STORE_INCOME_LOG.product_time
-  is 'Éú²úÊ±¼ä';
+  is 'ç”Ÿäº§æ—¶é—´';
 comment on column STORE_INCOME_LOG.expire_time
-  is '¹ıÆÚÊ±¼ä';
+  is 'è¿‡æœŸæ—¶é—´';
 comment on column STORE_INCOME_LOG.suplier_id
-  is '¹©Ó¦ÉÌid';
+  is 'ä¾›åº”å•†id';
 comment on column STORE_INCOME_LOG.create_time
-  is '´´½¨Ê±¼ä';
+  is 'åˆ›å»ºæ—¶é—´';
 comment on column STORE_INCOME_LOG.update_time
-  is 'ĞŞ¸ÄÊ±¼ä';
+  is 'ä¿®æ”¹æ—¶é—´';
 comment on column STORE_INCOME_LOG.remark
-  is '±¸×¢';
+  is 'å¤‡æ³¨';
+comment on column STORE_INCOME_LOG.quality_time
+  is 'è¿‡æœŸæ—¶é—´';
 
 -- Create table
 create table STORE_GOODS
@@ -150,24 +153,24 @@ tablespace UUC
   );
 -- Add comments to the table 
 comment on table STORE_GOODS
-  is 'ÉÌÆ·±í';
+  is 'å•†å“è¡¨';
 -- Add comments to the columns 
 comment on column STORE_GOODS.goods_id
-  is 'ÉÌÆ·id';
+  is 'å•†å“id';
 comment on column STORE_GOODS.price
-  is '×îĞÂ¼Û¸ñ';
+  is 'æœ€æ–°ä»·æ ¼';
 comment on column STORE_GOODS.goods_no
-  is 'ÉÌÆ·±àºÅ';
+  is 'å•†å“ç¼–å·';
 comment on column STORE_GOODS.goods_name
-  is 'ÉÌÆ·Ãû³Æ';
+  is 'å•†å“åç§°';
 comment on column STORE_GOODS.brand
-  is 'Æ·ÅÆ';
+  is 'å“ç‰Œ';
 comment on column STORE_GOODS.create_time
-  is '´´½¨Ê±¼ä';
+  is 'åˆ›å»ºæ—¶é—´';
 comment on column STORE_GOODS.update_time
-  is 'ĞŞ¸ÄÊ±¼ä';
+  is 'ä¿®æ”¹æ—¶é—´';
 comment on column STORE_GOODS.remark
-  is '±¸×¢';
+  is 'å¤‡æ³¨';
 
 -- Create sequence 
 create sequence SEQ_STORE_GOODS_ID
