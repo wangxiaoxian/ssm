@@ -15,8 +15,7 @@
 					<div class="index-logo">
 						<img src="common/image/top_logo.png" ></div>
 					<div class="index-title">
-						<h3>阿卿小卖部管理平台
-						</h3>
+						<h3>阿卿小卖部管理平台</h3>
 					</div>
 				</div>
 			</div>
@@ -33,36 +32,31 @@
 										用户登录
 									</h4>
 									<div class="space-6"></div>
-									<form>
-										<fieldset>
-											<label class="block clearfix">
-												<span class="block input-icon input-icon-right">
-													<input type="text" class="form-control" name="username" placeholder="用户名"/> 
-													<i class="ace-icon fa fa-user"></i>
-												</span>
-											</label>
+									<fieldset>
+										<label class="block clearfix">
+											<span class="block input-icon input-icon-right">
+												<input type="text" class="form-control" name="username" placeholder="用户名"/> 
+												<i class="ace-icon fa fa-user"></i>
+											</span>
+										</label>
+										<div style="color:red;text-align: center;" id="usernameErrorInfo">&nbsp;</div>
+										<label class="block clearfix">
+											<span class="block input-icon input-icon-right">
+												<input type="password" class="form-control"  name="password" placeholder="密码"/>
+												<i class="ace-icon fa fa-lock"></i>
+											</span>
+										</label>
+										<div style="color:red;text-align: center;" id="passwordErrorInfo">&nbsp;</div>
 
-											<label class="block clearfix">
-												<span class="block input-icon input-icon-right">
-													<input type="password" class="form-control"  name="password" placeholder="密码"/>
-													<i class="ace-icon fa fa-lock"></i>
-												</span>
-											</label>
-											<div class="space"></div>
-
-											<div class="clearfix">
-												<button name="loginBtn" id="loginBtn" class="width-35 pull-right btn btn-sm btn-primary">
-													<i class="ace-icon fa fa-key"></i>
-													<span class="bigger-110">登录</span>
-												</button>
-											</div>
-											<div class="space-4"></div>
-										</fieldset>
-									</form>
+										<div class="clearfix">
+											<button name="loginBtn" class="width-35 pull-right btn btn-sm btn-primary">
+												<i class="ace-icon fa fa-key"></i>
+												<span class="bigger-110">登录</span>
+											</button>
+										</div>
+										<div class="space-4"></div>
+									</fieldset>
 									<div class="space-6"></div>
-									<div class="social-login center">
-										<div id="errorInfo" class="red"></div>
-									</div>
 								</div>
 								<!-- /.widget-main -->
 								<!-- 
@@ -113,12 +107,16 @@ function login() {
 	var password = $("input[name='password']").val();
 	
 	if(!username) {
-		$("#errorInfo").html("请输入用户名");
-		return;
+		$("#usernameErrorInfo").html("请输入用户名");
+	} else {
+		$("#usernameErrorInfo").html("&nbsp;");
 	}
+	
 	if(!password) {
-		$("#errorInfo").html("请输入密码");
+		$("#passwordErrorInfo").html("请输入密码");
 		return;
+	} else {
+		$("#passwordErrorInfo").html("&nbsp;");
 	}
 	
 	$.ajax({
