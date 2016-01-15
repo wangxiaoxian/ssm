@@ -18,6 +18,23 @@
 		<param-value>springmvc.root</param-value>
 	</context-param>
 
+	<!-- 登陆拦截 -->
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>cn.springmvc.store.controller.filter.LoginFilter</filter-class>
+		<init-param>
+			<param-name>exclude-url</param-name>
+			<param-value>search.shtml,login,login.shtml</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>*.ajax</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>*.shtml</url-pattern>
+	</filter-mapping>
 
 	<!-- Spring字符集过滤器 -->
 	<filter>
