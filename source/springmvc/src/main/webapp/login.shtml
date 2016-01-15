@@ -103,6 +103,37 @@
 </div>
 <!--#include virtual="/common/footer.shtml" -->
 <script>
+$(function() {
+	$("button[name='loginBtn']").bind("click", login);
+});
+
+function login() {
+	
+	var username = $("input[name='username']").val();
+	var password = $("input[name='password']").val();
+	
+	if(!username) {
+		$("#errorInfo").html("请输入用户名");
+		return;
+	}
+	if(!password) {
+		$("#errorInfo").html("请输入密码");
+		return;
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : '/active/getMaxNo.ajax',
+		data : {
+			"username" : username,
+			"password" : password
+		},
+		dataType : 'json',
+		success : function(rs){
+			$("#activeNo").val(rs.data);
+		}
+	});
+}
 </script>
 </body>
 </html>
