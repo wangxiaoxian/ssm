@@ -13,10 +13,19 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
     
     <!-- 扫描controller（controller层注入） -->
-   <context:component-scan base-package="cn.springmvc.controller"/>
+    <context:component-scan base-package="cn.springmvc.**.controller"/>
    
-   <!-- 避免IE在ajax请求时，返回json出现下载 -->
-   <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">		
+    <!-- json数据的处理 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+		<property name="messageConverters">  
+			<list>  
+				<ref bean="jacksonMessageConverter"/>  
+			</list>  
+		</property>  
+	</bean> 
+   
+    <!-- 避免IE在ajax请求时，返回json出现下载 -->
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">		
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
@@ -24,7 +33,9 @@
 		</property>
 	</bean>
 	
-   <!-- 对模型视图添加前后缀 -->
-     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+    <!-- 对模型视图添加前后缀 -->
+    <!-- 
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
       p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+     -->
 </beans>
