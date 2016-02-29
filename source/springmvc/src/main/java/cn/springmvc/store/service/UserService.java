@@ -3,15 +3,34 @@
  * cn.springmvc.store.service  
  * UserService.java  
  * wangxiaoxian
- * 2015Äê12ÔÂ15ÈÕ-ÏÂÎç5:49:10
+ * 2015ï¿½ï¿½12ï¿½ï¿½15ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½5:49:10
  */
 package cn.springmvc.store.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cn.springmvc.store.dao.UserDao;
+import cn.springmvc.store.model.User;
 
 /**  
  *   
  * UserService  
- * 2015Äê12ÔÂ15ÈÕ ÏÂÎç5:49:10  
+ * 2015ï¿½ï¿½12ï¿½ï¿½15ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½5:49:10  
  */
 public class UserService {
+
+    @Autowired
+    private UserDao userDao;
+    
+    /** 
+     * 
+     * @param loginUser
+     * @return 
+     * User 
+     */
+    public User getUser(User user) {
+        User result = userDao.getUser(user);
+        return result;
+    }
 
 }

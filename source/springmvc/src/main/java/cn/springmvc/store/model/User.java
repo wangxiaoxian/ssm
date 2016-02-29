@@ -3,14 +3,16 @@
  * cn.springmvc.store.model  
  * User.java  
  * wangxiaoxian
- * 2015Äê12ÔÂ15ÈÕ-ÏÂÎç5:48:35
+ * 2015ï¿½ï¿½12ï¿½ï¿½15ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½5:48:35
  */
 package cn.springmvc.store.model;
+
+import java.sql.Date;
 
 /**  
  *   
  * User  
- * 2015Äê12ÔÂ15ÈÕ ÏÂÎç5:48:35  
+ * 2015ï¿½ï¿½12ï¿½ï¿½15ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½5:48:35  
  */
 public class User {
 
@@ -18,8 +20,8 @@ public class User {
 	private String username;
 	private String password;
 	private String nickname;
-	private String createTime;
-	private String updateTime;
+	private Date createTime;
+	private Date updateTime;
 	
 	public String getUserId() {
 		return userId;
@@ -45,17 +47,17 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-	public String getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 	
 }
