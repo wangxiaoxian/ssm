@@ -121,7 +121,7 @@ function login() {
 	
 	$.ajax({
 		type : "POST",
-		url : '/active/getMaxNo.ajax',
+		url : '/user/login.ajax',
 		data : {
 			"username" : username,
 			"password" : password

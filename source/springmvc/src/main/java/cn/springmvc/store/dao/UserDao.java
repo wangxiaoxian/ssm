@@ -3,15 +3,27 @@
  * cn.springmvc.store.dao  
  * UserDao.java  
  * wangxiaoxian
- * 2015Äê12ÔÂ15ÈÕ-ÏÂÎç5:48:44
+ * 2015ï¿½ï¿½12ï¿½ï¿½15ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½5:48:44
  */
 package cn.springmvc.store.dao;
+
+import org.apache.ibatis.annotations.Param;
+
+import cn.springmvc.store.model.User;
 
 /**  
  *   
  * UserDao  
- * 2015Äê12ÔÂ15ÈÕ ÏÂÎç5:48:44  
+ * 2015ï¿½ï¿½12ï¿½ï¿½15ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½5:48:44  
  */
 public interface UserDao {
+
+    /** 
+     * 
+     * @param user
+     * @return 
+     * User 
+     */
+    User getUser(@Param("userInfo") User userInfo);
 
 }
