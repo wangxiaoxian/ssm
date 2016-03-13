@@ -8,6 +8,7 @@
 package cn.springmvc.store.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cn.springmvc.store.dao.UserDao;
 import cn.springmvc.store.model.User;
@@ -17,6 +18,7 @@ import cn.springmvc.store.model.User;
  * UserService  
  * 2015��12��15�� ����5:49:10  
  */
+@Service
 public class UserService {
 
     @Autowired
