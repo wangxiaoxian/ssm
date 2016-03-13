@@ -3,15 +3,17 @@
  * cn.springmvc.store.controller  
  * GoodsController.java  
  * wangxiaoxian
- * 2015дЙ12тб15ху-обнГ5:49:53
+ * 2015О©╫О©╫12О©╫О©╫15О©╫О©╫-О©╫О©╫О©╫О©╫5:49:53
  */
 package cn.springmvc.store.controller;
 
 /**  
  *   
  * GoodsController  
- * 2015дЙ12тб15ху обнГ5:49:53  
+ * 2015О©╫О©╫12О©╫О©╫15О©╫О©╫ О©╫О©╫О©╫О©╫5:49:53  
  */
+
 public class GoodsController {
 
+    // ...
 }
