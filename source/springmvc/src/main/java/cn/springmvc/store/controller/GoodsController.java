@@ -10,7 +10,6 @@ package cn.springmvc.store.controller;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**  
  *   
@@ -21,6 +20,5 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/goods")
 @Scope("prototype")
 public class GoodsController {
-
 	
 }
