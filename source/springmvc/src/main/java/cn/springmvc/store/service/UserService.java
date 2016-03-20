@@ -16,7 +16,6 @@ import cn.springmvc.store.model.User;
 /**  
  *   
  * UserService  
- * 2015��12��15�� ����5:49:10  
  */
 @Service
 public class UserService {

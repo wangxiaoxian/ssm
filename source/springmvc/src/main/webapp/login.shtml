@@ -121,7 +121,7 @@ function login() {
 	
 	$.ajax({
 		type : "POST",
-		url : '/user/login.ajax',
+		url : ctxPath + 'user/login.ajax',
 		data : {
 			"username" : username,
 			"password" : password

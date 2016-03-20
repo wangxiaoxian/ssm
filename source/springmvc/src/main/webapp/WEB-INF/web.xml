@@ -19,6 +19,7 @@
 	</context-param>
 
 	<!-- 登陆拦截 -->
+	<!-- 
 	<filter>
 		<filter-name>loginFilter</filter-name>
 		<filter-class>cn.springmvc.store.controller.filter.LoginFilter</filter-class>
@@ -35,7 +36,8 @@
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>*.shtml</url-pattern>
 	</filter-mapping>
-
+	 -->
+	 
 	<!-- Spring字符集过滤器 -->
 	<filter>
 		<filter-name>SpringEncodingFilter</filter-name>
@@ -85,7 +87,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

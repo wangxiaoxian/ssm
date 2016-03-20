@@ -12,7 +12,6 @@ import java.util.Date;
 /**  
  *   
  * Goods  
- * 2015年12月15日 ����5:52:20  
  */
 public class Goods {
 	

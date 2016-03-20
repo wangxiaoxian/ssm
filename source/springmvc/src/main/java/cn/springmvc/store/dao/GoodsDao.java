@@ -3,15 +3,22 @@
  * cn.springmvc.store.dao  
  * GoodsDao.java  
  * wangxiaoxian
- * 2015年12月15日-下午5:51:23
+ * 2015锟斤拷12锟斤拷15锟斤拷-锟斤拷锟斤拷5:51:23
  */
 package cn.springmvc.store.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import cn.springmvc.store.model.Goods;
 
 /**  
  *   
  * GoodsDao  
- * 2015年12月15日 下午5:51:23  
  */
 public interface GoodsDao {
+
+	List<Goods> queryPage(@Param("param")Goods param);
 
 }

@@ -3,14 +3,13 @@
  * cn.springmvc.store.dao  
  * IncomeLogDao.java  
  * wangxiaoxian
- * 2015年12月15日-下午5:51:39
+ * 2015锟斤拷12锟斤拷15锟斤拷-锟斤拷锟斤拷5:51:39
  */
 package cn.springmvc.store.dao;
 
 /**  
  *   
  * IncomeLogDao  
- * 2015年12月15日 下午5:51:39  
  */
 public interface IncomeLogDao {
 

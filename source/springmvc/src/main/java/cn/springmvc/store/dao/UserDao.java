@@ -14,7 +14,6 @@ import cn.springmvc.store.model.User;
 /**  
  *   
  * UserDao  
- * 2015��12��15�� ����5:48:44  
  */
 public interface UserDao {
 
