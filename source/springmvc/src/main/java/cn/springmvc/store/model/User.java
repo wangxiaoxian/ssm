@@ -12,7 +12,6 @@ import java.sql.Date;
 /**  
  *   
  * User  
- * 2015��12��15�� ����5:48:35  
  */
 public class User {
 

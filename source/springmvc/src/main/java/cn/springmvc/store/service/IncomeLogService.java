@@ -3,14 +3,13 @@
  * cn.springmvc.store.service  
  * IncomeLogService.java  
  * wangxiaoxian
- * 2015年12月15日-下午5:53:47
+ * 2015锟斤拷12锟斤拷15锟斤拷-锟斤拷锟斤拷5:53:47
  */
 package cn.springmvc.store.service;
 
 /**  
  *   
  * IncomeLogService  
- * 2015年12月15日 下午5:53:47  
  */
 public class IncomeLogService {
 

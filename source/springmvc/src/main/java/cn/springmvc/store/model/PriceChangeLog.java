@@ -3,14 +3,13 @@
  * cn.springmvc.store.model  
  * PriceChangeLog.java  
  * wangxiaoxian
- * 2015年12月15日-下午5:52:43
+ * 2015锟斤拷12锟斤拷15锟斤拷-锟斤拷锟斤拷5:52:43
  */
 package cn.springmvc.store.model;
 
 /**  
  *   
  * PriceChangeLog  
- * 2015年12月15日 下午5:52:43  
  */
 public class PriceChangeLog {
 

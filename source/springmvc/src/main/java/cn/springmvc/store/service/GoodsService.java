@@ -3,15 +3,23 @@
  * cn.springmvc.store.service  
  * GoodsService.java  
  * wangxiaoxian
- * 2015年12月15日-下午5:53:03
+ * 2015锟斤拷12锟斤拷15锟斤拷-锟斤拷锟斤拷5:53:03
  */
 package cn.springmvc.store.service;
+
+import java.util.List;
+
+import cn.springmvc.store.model.Goods;
+
 
 /**  
  *   
  * GoodsService  
- * 2015年12月15日 下午5:53:03  
  */
-public class GoodsService {
+public interface GoodsService {
+
+	List<Goods> queryPage(Goods condition);
+
+	
 
 }

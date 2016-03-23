@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!--#include virtual="/common/base_params.jsp"  -->
-<!--#include virtual="/common/header.shtml" -->
+<!--#include virtual="common/base_params.jsp"  -->
+<!--#include virtual="common/header.shtml" -->
 <link rel="stylesheet" href="common/css/index.css" />
 <title>用户登录</title>
 </head>
@@ -95,7 +95,7 @@
 		<p class="text-muted">阿卿小卖部版权所有</p>
 	</div>
 </div>
-<!--#include virtual="/common/footer.shtml" -->
+<!--#include virtual="common/footer.shtml" -->
 <script>
 $(function() {
 	$("button[name='loginBtn']").bind("click", login);
@@ -121,7 +121,7 @@ function login() {
 	
 	$.ajax({
 		type : "POST",
-		url : '/user/login.ajax',
+		url : ctxPath + 'user/login.ajax',
 		data : {
 			"username" : username,
 			"password" : password
