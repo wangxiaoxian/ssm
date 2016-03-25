@@ -18,7 +18,7 @@
     http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
-    destroy-method="close" >
+    	destroy-method="close" >
 	    <property name="driverClassName">
 	      <value>${db.driverClassName}</value>
 	    </property>
@@ -33,31 +33,31 @@
 	    </property>
 	    <!-- 连接池最大使用连接数 -->
 	    <property name="maxActive">
-	      <value>20</value>
+	      <value>${pool.maxActive}</value>
 	    </property>
 	    <!-- 初始化连接大小 -->
 	    <property name="initialSize">
-	      <value>1</value>
+	      <value>${pool.initialSize}</value>
 	    </property>
 	    <!-- 获取连接最大等待时间 -->
 	    <property name="maxWait">
-	      <value>60000</value>
+	      <value>${pool.maxWait}</value>
 	    </property>
 	    <!-- 连接池最大空闲 -->
 	    <property name="maxIdle">
-	      <value>20</value>
+	      <value>${pool.maxIdle}</value>
 	    </property>
 	    <!-- 连接池最小空闲 -->
 	    <property name="minIdle">
-	      <value>3</value>
+	      <value>${pool.minIdle}</value>
 	    </property>
 	    <!-- 自动清除无用连接 -->
 	    <property name="removeAbandoned">
-	      <value>true</value>
+	      <value>${pool.removeAbandoned}</value>
 	    </property>
 	    <!-- 清除无用连接的等待时间 -->
 	    <property name="removeAbandonedTimeout">
-	      <value>180</value>
+	      <value>${pool.removeAbandonedTimeout}</value>
 	    </property>
 	    <!-- 连接属性 -->
 	    <property name="connectionProperties">
@@ -66,11 +66,12 @@
     </bean>
     
     <!-- mybatis文件配置，扫描所有mapper文件 -->
+    <!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
     <bean id="sqlSessionFactory"
           class="org.mybatis.spring.SqlSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:conf/mybatis-config.xml"
-          p:mapperLocations="classpath:cn/springmvc/**/dao/mysql/*.xml"/><!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
+          p:mapperLocations="classpath:cn/springmvc/**/dao/mysql/*.xml"/>
       
     <!-- spring与mybatis整合配置，扫描所有dao -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
