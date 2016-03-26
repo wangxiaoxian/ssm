@@ -1,7 +1,3 @@
 /source/springmvc/.classpath
 /source/springmvc/target
-classes
-m2e-wtp
-test-classes
-target
-.classpath
+/source/springmvc/bin
