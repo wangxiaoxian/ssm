@@ -7,15 +7,18 @@
  */
 package cn.springmvc.store.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**  
  *   
  * Goods  
  */
-public class Goods {
+public class Goods implements Serializable {
 	
-	private String goodsId;
+	private static final long serialVersionUID = 1L;
+	
+	private Integer goodsId;
 	private int price;
 	private String goodsNo;
 	private String goodsName;
@@ -23,12 +26,6 @@ public class Goods {
 	private String remark;
 	private Date createTime;
 	private Date updateTime;
-	public String getGoodsId() {
-		return goodsId;
-	}
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
 	public int getPrice() {
 		return price;
 	}
@@ -70,6 +67,12 @@ public class Goods {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public Integer getGoodsId() {
+		return goodsId;
+	}
+	public void setGoodsId(Integer goodsId) {
+		this.goodsId = goodsId;
 	}
 	
 }

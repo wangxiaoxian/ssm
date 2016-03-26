@@ -12,8 +12,6 @@
 	    <result column="remark" property="remark" jdbcType="VARCHAR" />
 	    <result column="create_time" property="createTime" jdbcType="DATE" />
 	    <result column="update_time" property="updateTime" jdbcType="DATE" />
-	    
-	    <result column="totalRecords" property="totalRecords" jdbcType="INTEGER" />
 	</resultMap>
 	
 	<sql id="allmenbers">
@@ -27,6 +25,12 @@
 		update_time
 	</sql>
 	
+	<select id="queryGoodsName" parameterType="java.lang.String">
+		select goods_id,goods_name
+		from store_goods
+		where goods_name like concat('%',#{goodsName,jdbcType=VARCHAR},'%')
+	</select>
+	
 	<select id="queryPage" resultMap="Goods">
 		select 
 		<include refid="allmenbers"/>
@@ -37,5 +41,14 @@
 			</if>
 		</where>
 	</select>
-         
+    <insert id="insert" parameterType="cn.springmvc.store.model.Goods">
+    	insert into store_goods(
+    		goods_name
+    	) values (
+    		#{goodsName,jdbcType=VARCHAR}
+    	)
+    	<selectKey keyProperty="goodsId" order="AFTER" resultType="int" >
+    	SELECT LAST_INSERT_ID() AS goods_id
+    	</selectKey>
+    </insert>
 </mapper>

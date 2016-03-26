@@ -21,4 +21,7 @@ public interface GoodsDao {
 
 	List<Goods> queryPage(@Param("param")Goods param);
 
+	List<Goods> queryGoodsName(String goodsName);
+	
+	int insert(Goods goods);
 }
