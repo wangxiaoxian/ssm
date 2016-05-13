@@ -16,53 +16,32 @@
     http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
     http://www.springframework.org/schema/util 
     http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<context:component-scan base-package="cn.springmvc.**.cache"/>
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" 
+    	init-method="init"
     	destroy-method="close" >
-	    <property name="driverClassName">
-	      <value>${db.driverClassName}</value>
-	    </property>
-	    <property name="url">
-	      <value>${db.url}</value>
-	    </property>
-	    <property name="username">
-	      <value>${db.username}</value>
-	    </property>
-	    <property name="password">
-	      <value>${db.password}</value>
-	    </property>
+	    <property name="driverClassName" value="${db.driverClassName}"/>
+	    <property name="url" value="${db.url}"/>
+	    <property name="username" value="${db.username}"/>
+	    <property name="password" value="${db.password}"/>
 	    <!-- 连接池最大使用连接数 -->
-	    <property name="maxActive">
-	      <value>${pool.maxActive}</value>
-	    </property>
+	    <property name="maxActive" value="${pool.maxActive}"/>
 	    <!-- 初始化连接大小 -->
-	    <property name="initialSize">
-	      <value>${pool.initialSize}</value>
-	    </property>
+	    <property name="initialSize" value="${pool.initialSize}"/>
 	    <!-- 获取连接最大等待时间 -->
-	    <property name="maxWait">
-	      <value>${pool.maxWait}</value>
-	    </property>
+	    <property name="maxWait" value="${pool.maxWait}"/>
 	    <!-- 连接池最大空闲 -->
-	    <property name="maxIdle">
-	      <value>${pool.maxIdle}</value>
-	    </property>
+	    <property name="maxIdle" value="${pool.maxIdle}"/>
 	    <!-- 连接池最小空闲 -->
-	    <property name="minIdle">
-	      <value>${pool.minIdle}</value>
-	    </property>
+	    <property name="minIdle" value="${pool.minIdle}"/>
 	    <!-- 自动清除无用连接 -->
-	    <property name="removeAbandoned">
-	      <value>${pool.removeAbandoned}</value>
-	    </property>
+	    <property name="removeAbandoned" value="${pool.removeAbandoned}"/>
 	    <!-- 清除无用连接的等待时间 -->
-	    <property name="removeAbandonedTimeout">
-	      <value>${pool.removeAbandonedTimeout}</value>
-	    </property>
+	    <property name="removeAbandonedTimeout" value="${pool.removeAbandonedTimeout}"/>
 	    <!-- 连接属性 -->
-	    <property name="connectionProperties">
-	      <value>clientEncoding=UTF-8</value>
-	    </property>
+	    <property name="connectionProperties" value="clientEncoding=UTF-8"/>
     </bean>
     
     <!-- mybatis文件配置，扫描所有mapper文件 -->
@@ -82,4 +61,5 @@
 	<bean id="transactionManager" 
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
         p:dataSource-ref="dataSource"/>
+    
 </beans>
