@@ -1,0 +1,17 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+
+<meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+<link rel="stylesheet" href="common/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="common/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
+
+<link rel="stylesheet" href="common/assets/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="common/assets/css/datepicker.min.css" />
+<link rel="stylesheet" href="common/assets/css/ui.jqgrid.min.css" />
+
+<link rel="stylesheet" href="common/assets/fonts/fonts.googleapis.com.css" />
+
+<link rel="stylesheet" href="common/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+<script src="common/assets/js/ace-extra.min.js"></script>

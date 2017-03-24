@@ -1,0 +1,43 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+             http://maven.apache.org/xsd/settings-1.0.0.xsd">
+     <localRepository/>
+     <interactiveMode/>
+     <usePluginRegistry/>
+     <offline/>
+     <pluginGroups/>
+     <servers/>
+
+     <mirrors>
+		<!-- mirror
+		 | Specifies a repository mirror site to use instead of a given repository. The repository that
+		 | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+		 | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+		 |
+		<mirror>
+		  <id>mirrorId</id>
+		  <mirrorOf>repositoryId</mirrorOf>
+		  <name>Human Readable Name for this Mirror.</name>
+		  <url>http://my.repository.com/repo/path</url>
+		</mirror>
+		-->
+		 <mirror>
+		  <id>CN</id>
+		  <name>OSChina Central</name>                                                                                                                       
+		  <url>http://maven.oschina.net/content/groups/public/</url>
+		  <mirrorOf>central</mirrorOf>
+		</mirror>
+		 <mirror>  
+			 <id>jboss-public-repository-group</id>  
+			 <mirrorOf>central</mirrorOf>  
+			 <name>JBoss Public Repository Group</name>  
+			 <url>http://repository.jboss.org/nexus/content/groups/public</url>  
+		 </mirror>  
+			
+	  </mirrors>
+
+     <proxies/>
+     <profiles/>
+     <activeProfiles/>
+</settings>

@@ -1,0 +1,17 @@
+<script src="common/assets/js/jquery.2.1.1.min.js"></script>
+
+<script type="text/javascript">
+	window.jQuery || document.write("<script src='common/assets/js/jquery.min.js'>"+"<"+"/script>");
+</script>
+
+<script type="text/javascript">
+	if('ontouchstart' in document.documentElement) document.write("<script src='common/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="common/assets/js/bootstrap.min.js"></script>
+
+<script src="common/assets/js/bootstrap-datepicker.min.js"></script>
+<script src="common/assets/js/jquery.jqGrid.min.js"></script>
+<script src="common/assets/js/grid.locale-en.js"></script>
+
+<script src="common/assets/js/ace-elements.min.js"></script>
+<script src="common/assets/js/ace.min.js"></script>
