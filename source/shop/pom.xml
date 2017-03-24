@@ -317,4 +317,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	<modules>
+		<module>shop-goods</module>
+  </modules>
 </project>
