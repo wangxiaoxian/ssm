@@ -263,7 +263,6 @@
 	</dependencies>
 	
 	<build>
-		<finalName>shop</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -319,5 +318,5 @@
 	</build>
 	<modules>
 		<module>shop-goods</module>
-  </modules>
+	</modules>
 </project>
