@@ -1,29 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>eyas.springmvc</groupId>
-	<artifactId>springmvc</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>springmvc Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<groupId>com.wxx.shop</groupId>
+	<artifactId>shop</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
+	<name>Wangxiaoxian Shop</name>
+
 	<properties>
-		<!-- spring版本号 -->
-		<spring.version>3.2.14.RELEASE</spring.version>
-		<!-- mybatis版本号 -->
-		<mybatis.version>3.2.8</mybatis.version>
-		<!-- redis客户端版本号 -->
-		<redis.version>2.7.3</redis.version>
-		<!-- log4j日志文件管理包版本 -->
+		<spring.version>4.2.9.RELEASE</spring.version>
+		<mybatis.version>3.3.1</mybatis.version>
+		<redis.version>2.8.2</redis.version>
 		<slf4j.version>1.6.6</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<project.deploy.directory>./target</project.deploy.directory>
 	</properties>
-	
+
+	<!-- 打包后发到哪个仓库，一般release和snapshot版本是发到不同的库
+	<distributionManagement>
+		<repository>
+			<id>user-release</id>
+			<name>Release Repository</name>
+			<url>http://10.12.3.121:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>user-snapshot</id>
+			<name>Snapshots Repository</name>
+			<url>http://10.12.3.121:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	 -->
+
 	<repositories>
 		<repository>
 			<id>central-repos</id>
 			<name>Central Repository</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>	
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
@@ -250,7 +263,25 @@
 	</dependencies>
 	
 	<build>
-		<finalName>springmvc</finalName>
+		<finalName>shop</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<!-- 是否替换资源中的属性-->
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<!-- 是否替换资源中的属性-->
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 		        <groupId>org.mybatis.generator</groupId>
@@ -269,9 +300,21 @@
 	            <artifactId>maven-compiler-plugin</artifactId>  
 	            <configuration>  
 	                <source>1.7</source>  
-	                <target>1.7</target>  
+	                <target>1.7</target>
+					<encoding>UTF8</encoding>
 	            </configuration>  
-	        </plugin> 
+	        </plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<finalName>shop</finalName>
+					<outputDirectory>${project.deploy.directory}</outputDirectory>
+					<descriptors>
+						<descriptor>release.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
