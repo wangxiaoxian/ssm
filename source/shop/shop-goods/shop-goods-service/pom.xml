@@ -6,6 +6,7 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>shop-goods-service</artifactId>
+	<packaging>jar</packaging>
 
   <dependencies>
 	<dependency>
