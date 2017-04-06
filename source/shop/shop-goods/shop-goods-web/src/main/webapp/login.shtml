@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <!--#include virtual="common/base_params.jsp"  -->
-<!--#include virtual="common/header.shtml" -->
+<!--#include virtual="common/header.jsp" -->
 <link rel="stylesheet" href="common/css/index.css" />
 <title>用户登录</title>
 </head>
