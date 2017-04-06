@@ -5,10 +5,13 @@
  * wangxiaoxian
  * 2015��12��15��-����5:49:53
  */
-package cn.springmvc.store.controller;
+package com.wxx.shop.controller;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+import com.wxx.shop.model.Goods;
+import com.wxx.shop.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,11 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.springmvc.store.model.Goods;
-import cn.springmvc.store.service.GoodsService;
-
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 /**  
  *   
