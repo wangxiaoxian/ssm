@@ -1,6 +1,6 @@
-package cn.springmvc.service;
+package com.wxx.shop.service;
 
-import cn.springmvc.model.User;
+import com.wxx.shop.model.User;
 
 
 public interface UserService {

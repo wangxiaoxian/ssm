@@ -5,14 +5,13 @@
  * wangxiaoxian
  * 2015��12��15��-����5:53:03
  */
-package cn.springmvc.store.service;
+package com.wxx.shop.service;
+
+import com.wxx.shop.model.Goods;
 
 import java.util.List;
 
-import cn.springmvc.store.model.Goods;
-
-
-/**  
+/**
  *   
  * GoodsService  
  */

@@ -5,7 +5,7 @@
  * wangxiaoxian
  * 2015��12��15��-����5:48:35
  */
-package cn.springmvc.store.model;
+package com.wxx.shop.model;
 
 import java.sql.Date;
 

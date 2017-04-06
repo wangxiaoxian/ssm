@@ -5,7 +5,7 @@
  * wangxiaoxian
  * 2015年12月15日-����5:52:20
  */
-package cn.springmvc.store.model;
+package com.wxx.shop.model;
 
 import java.io.Serializable;
 import java.util.Date;

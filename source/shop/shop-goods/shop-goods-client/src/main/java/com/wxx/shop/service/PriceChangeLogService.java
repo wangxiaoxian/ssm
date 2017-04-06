@@ -5,7 +5,7 @@
  * wangxiaoxian
  * 2015��12��15��-����5:54:06
  */
-package cn.springmvc.store.service;
+package com.wxx.shop.service;
 
 /**  
  *   
