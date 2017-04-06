@@ -6,7 +6,7 @@
 	<artifactId>shop</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0</version>
-	<name>Wangxiaoxian Shop</name>
+	<name>shop</name>
 
 	<properties>
 		<spring.version>4.2.9.RELEASE</spring.version>
@@ -186,9 +186,9 @@
 		
 		<!-- 数据库 -->
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.4.0</version>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-ojdbc</artifactId>
+			<version>6</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -218,7 +218,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- json数据 -->
