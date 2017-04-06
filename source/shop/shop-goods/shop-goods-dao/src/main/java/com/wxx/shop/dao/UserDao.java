@@ -5,21 +5,23 @@
  * wangxiaoxian
  * 2015��12��15��-����5:48:44
  */
-package cn.springmvc.store.dao;
+package com.wxx.shop.dao;
 
+import com.wxx.shop.model.User;
 import org.apache.ibatis.annotations.Param;
 
-import cn.springmvc.store.model.User;
+import org.springframework.stereotype.Repository;
 
 /**  
  *   
  * UserDao  
  */
+@Repository
 public interface UserDao {
 
     /** 
      * 
-     * @param user
+     * @param userInfo
      * @return 
      * User 
      */

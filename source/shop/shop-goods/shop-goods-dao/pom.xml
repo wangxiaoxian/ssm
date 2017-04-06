@@ -7,4 +7,11 @@
   </parent>
   <artifactId>shop-goods-dao</artifactId>
   <packaging>jar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.wxx.shop</groupId>
+      <artifactId>shop-goods-client</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
 </project>

@@ -4,7 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.springmvc.store.dao.UserDAO">
 
-	<resultMap type="cn.springmvc.store.dao.UserDao" id="user">
+	<resultMap type="UserDao" id="user">
 		<id column="USER_ID" property="userId" jdbcType="VARCHAR" />
 		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
 		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
