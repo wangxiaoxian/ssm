@@ -201,6 +201,12 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.15</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.3</version>
+		</dependency>
 		<!-- jedis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -276,6 +282,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.xml</include>
+					<include>**/*.properties</include>
 				</includes>
 				<!-- 是否替换资源中的属性-->
 				<filtering>false</filtering>
