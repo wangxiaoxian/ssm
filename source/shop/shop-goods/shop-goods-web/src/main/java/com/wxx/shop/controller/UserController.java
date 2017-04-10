@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 public class UserController {
 	
-    @Autowired
-    private UserService userService;
+    //@Autowired
+    //private UserService userService;
     
 	@RequestMapping("index")
 	public @ResponseBody String index(){

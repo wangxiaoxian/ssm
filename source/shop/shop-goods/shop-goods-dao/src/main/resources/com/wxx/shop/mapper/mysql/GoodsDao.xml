@@ -2,16 +2,18 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wxx.shop.store.dao.GoodsDao">
-	<resultMap type="com.wxx.shop.store.model.Goods" id="Goods">
+<mapper namespace="com.wxx.shop.dao.GoodsDao">
+	<resultMap type="com.wxx.shop.model.Goods" id="Goods">
 		<id column="goods_id" property="goodsId" jdbcType="INTEGER" />
 	    <result column="price" property="price" jdbcType="INTEGER" />
 	    <result column="goods_no" property="goodsNo" jdbcType="VARCHAR" />
 	    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+	    <result column="goods_py_name" property="goodsPyName" jdbcType="VARCHAR" />
+	    <result column="goods_shot_py_name" property="goodsShotPyName" jdbcType="VARCHAR" />
 	    <result column="brand" property="brand" jdbcType="VARCHAR" />
 	    <result column="remark" property="remark" jdbcType="VARCHAR" />
-	    <result column="create_time" property="createTime" jdbcType="DATE" />
-	    <result column="update_time" property="updateTime" jdbcType="DATE" />
+	    <result column="create_time" property="createTime" jdbcType="DATETIME" />
+	    <result column="update_time" property="updateTime" jdbcType="DATETIME" />
 	</resultMap>
 	
 	<sql id="allmenbers">
@@ -19,30 +21,36 @@
 		price,
 		goods_no,
 		goods_name,
+		goods_py_name,
+		goods_shot_py_name,
 		brand,
 		remark,
 		create_time,
 		update_time
 	</sql>
 	
-	<select id="queryGoodsName" parameterType="java.lang.String">
-		select goods_id,goods_name
-		from store_goods
-		where goods_name like concat('%',#{goodsName,jdbcType=VARCHAR},'%')
+	<select id="queryByName" parameterType="java.lang.String">
+		select goods_id,price,goods_name
+		from goods
+		<where>
+		goods_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+		or goods_py_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+		or goods_shot_py_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+		</where>
 	</select>
 	
 	<select id="queryPage" resultMap="Goods">
 		select 
 		<include refid="allmenbers"/>
-		from store_goods
+		from goods
 		<where>
 			<if test="param.goodsName != null and param.goodsName != ''">
 				and goods_name like concat('%',#{param.goodsName,jdbcType=VARCHAR},'%')
 			</if>
 		</where>
 	</select>
-    <insert id="insert" parameterType="com.wxx.shop.store.model.Goods">
-    	insert into store_goods(
+    <insert id="insert" parameterType="com.wxx.shop.model.Goods">
+    	insert into goods(
     		goods_name
     	) values (
     		#{goodsName,jdbcType=VARCHAR}

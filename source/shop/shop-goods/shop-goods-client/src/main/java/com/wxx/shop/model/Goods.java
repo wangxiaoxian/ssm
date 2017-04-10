@@ -22,10 +22,29 @@ public class Goods implements Serializable {
 	private int price;
 	private String goodsNo;
 	private String goodsName;
+	private String goodsPyName;
+	private String goodsShotPyName;
 	private String brand;
 	private String remark;
 	private Date createTime;
 	private Date updateTime;
+
+	public String getGoodsPyName() {
+		return goodsPyName;
+	}
+
+	public void setGoodsPyName(String goodsPyName) {
+		this.goodsPyName = goodsPyName;
+	}
+
+	public String getGoodsShotPyName() {
+		return goodsShotPyName;
+	}
+
+	public void setGoodsShotPyName(String goodsShotPyName) {
+		this.goodsShotPyName = goodsShotPyName;
+	}
+
 	public int getPrice() {
 		return price;
 	}

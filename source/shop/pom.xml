@@ -325,5 +325,6 @@
 	</build>
 	<modules>
 		<module>shop-goods</module>
+		<module>shop-common</module>
 	</modules>
 </project>

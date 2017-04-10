@@ -21,4 +21,9 @@ public class GoodsServiceImpl implements GoodsService {
 		List<Goods> list = goodsDao.queryPage(condition);
 		return list;
 	}
+
+	@Override
+	public List<Goods> queryByName(String goodsSearchName) {
+		return goodsDao.queryByName(goodsSearchName);
+	}
 }

@@ -22,7 +22,7 @@ public interface GoodsDao {
 
 	List<Goods> queryPage(@Param("param") Goods param);
 
-	List<Goods> queryGoodsName(String goodsName);
+	List<Goods> queryByName(String goodsSearchName);
 	
 	int insert(Goods goods);
 }

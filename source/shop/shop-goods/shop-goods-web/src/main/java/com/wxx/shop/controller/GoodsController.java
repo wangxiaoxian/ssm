@@ -9,17 +9,19 @@ package com.wxx.shop.controller;
 
 import java.util.List;
 
-import com.github.pagehelper.PageInfo;
-import com.wxx.shop.model.Goods;
-import com.wxx.shop.service.GoodsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.wxx.shop.WebResult;
+import com.wxx.shop.model.Goods;
+import com.wxx.shop.service.GoodsService;
 
 /**  
  *   
@@ -27,14 +29,11 @@ import com.github.pagehelper.PageHelper;
  */
 @Controller
 @RequestMapping(value = "/goods")
-@Scope("prototype")
 public class GoodsController {
-	
-	@Autowired
-	private GoodsService goodsService;
-	
-	@RequestMapping(value="/commonSearch.ajax", method=RequestMethod.POST)
-	public @ResponseBody PageInfo<Goods> commonSearch(String goodsName, Integer pageNum, Integer pageSize) {
+
+	@RequestMapping("/queryPage.ajax")
+	@ResponseBody
+	public PageInfo<Goods> queryPage(String goodsName, Integer pageNum, Integer pageSize) {
 		Goods param = new Goods();
 		param.setGoodsName(goodsName);
 		
@@ -44,4 +43,23 @@ public class GoodsController {
 	    
 	    return page;
 	}
+
+	@RequestMapping("/queryByName.ajax")
+	@ResponseBody
+	public WebResult queryByName(String goodsSearchName) {
+		WebResult wr = new WebResult();
+		try {
+			List<Goods> goods = goodsService.queryByName(goodsSearchName);
+			wr.setData(goods);
+		} catch (Exception e) {
+			LOGGER.error("根据名称查询异常", e);
+			wr.setCode(500);
+		}
+		return wr;
+	}
+
+	@Autowired
+	private GoodsService goodsService;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(GoodsController.class);
 }
