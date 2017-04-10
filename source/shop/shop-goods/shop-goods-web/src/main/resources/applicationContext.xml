@@ -103,9 +103,4 @@
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
-
-    <!-- 自动扫描mapper接口 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.wxx.*.**.dao" />
-    </bean>
 </beans>
