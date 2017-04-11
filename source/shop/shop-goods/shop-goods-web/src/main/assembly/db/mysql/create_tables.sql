@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id自增',
-  `price` int(11) DEFAULT NULL COMMENT '最新价格',
+  `price` decimal(11,2) DEFAULT NULL COMMENT '最新价格',
   `goods_no` varchar(16) DEFAULT NULL COMMENT '商品编号',
   `goods_name` varchar(16) DEFAULT NULL COMMENT '商品名称',
   `brand` varchar(64) DEFAULT NULL COMMENT '品牌',
