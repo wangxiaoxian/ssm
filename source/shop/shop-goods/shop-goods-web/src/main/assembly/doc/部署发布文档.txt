@@ -1,0 +1,9 @@
+本系统需要以下初始化步骤：
+1、启动redis：
+redis-server redis.conf
+
+2、启动zookeeper：
+zkServer.sh start
+
+3、启动kafka
+bin/kafka-server-start.sh config/server.properties
