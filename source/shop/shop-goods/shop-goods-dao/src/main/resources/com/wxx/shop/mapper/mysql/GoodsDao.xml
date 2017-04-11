@@ -5,37 +5,39 @@
 <mapper namespace="com.wxx.shop.dao.GoodsDao">
 	<resultMap type="com.wxx.shop.model.Goods" id="Goods">
 		<id column="goods_id" property="goodsId" jdbcType="INTEGER" />
-	    <result column="price" property="price" jdbcType="INTEGER" />
 	    <result column="goods_no" property="goodsNo" jdbcType="VARCHAR" />
+	    <result column="price" property="price" jdbcType="DECIMAL" />
 	    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
 	    <result column="goods_py_name" property="goodsPyName" jdbcType="VARCHAR" />
-	    <result column="goods_shot_py_name" property="goodsShotPyName" jdbcType="VARCHAR" />
-	    <result column="brand" property="brand" jdbcType="VARCHAR" />
-	    <result column="remark" property="remark" jdbcType="VARCHAR" />
-	    <result column="create_time" property="createTime" jdbcType="DATETIME" />
-	    <result column="update_time" property="updateTime" jdbcType="DATETIME" />
+	    <result column="goods_short_py_name" property="goodsShortPyName" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="creator" property="creator" jdbcType="VARCHAR" />
+	    <result column="update_time" property="upTIMESTAMP" jdbcType="TIMESTAMP" />
+	    <result column="updater" property="updater" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
 	<sql id="allmenbers">
 		goods_id,
-		price,
 		goods_no,
 		goods_name,
 		goods_py_name,
-		goods_shot_py_name,
-		brand,
-		remark,
+		goods_short_py_name,
 		create_time,
-		update_time
+		creator,
+		update_time,
+		updater
 	</sql>
 	
-	<select id="queryByName" parameterType="java.lang.String">
-		select goods_id,price,goods_name
-		from goods
+	<select id="queryByName" parameterType="java.lang.String" resultMap="Goods">
+		select t1.goods_id,t1.goods_name,t2.price
+		from goods t1
+		left join goods_price t2 on t1.goods_id=t2.goods_id
 		<where>
-		goods_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
-		or goods_py_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
-		or goods_shot_py_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+			<if test="goodsSearchName != null">
+				t1.goods_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+			or t1.goods_py_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+			or t1.goods_short_py_name like concat('%',#{goodsSearchName,jdbcType=VARCHAR},'%')
+			</if>
 		</where>
 	</select>
 	

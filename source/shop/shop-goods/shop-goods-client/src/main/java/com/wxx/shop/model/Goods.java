@@ -8,6 +8,7 @@
 package com.wxx.shop.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**  
@@ -19,16 +20,23 @@ public class Goods implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer goodsId;
-	private int price;
+	private BigDecimal price;
 	private String goodsNo;
 	private String goodsName;
 	private String goodsPyName;
-	private String goodsShotPyName;
-	private String brand;
-	private String remark;
+
+
+	private String goodsShortPyName;
 	private Date createTime;
 	private Date updateTime;
 
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 	public String getGoodsPyName() {
 		return goodsPyName;
 	}
@@ -37,19 +45,13 @@ public class Goods implements Serializable {
 		this.goodsPyName = goodsPyName;
 	}
 
-	public String getGoodsShotPyName() {
-		return goodsShotPyName;
+
+	public String getGoodsShortPyName() {
+		return goodsShortPyName;
 	}
 
-	public void setGoodsShotPyName(String goodsShotPyName) {
-		this.goodsShotPyName = goodsShotPyName;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setGoodsShortPyName(String goodsShortPyName) {
+		this.goodsShortPyName = goodsShortPyName;
 	}
 	public String getGoodsNo() {
 		return goodsNo;
@@ -62,18 +64,6 @@ public class Goods implements Serializable {
 	}
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
-	}
-	public String getBrand() {
-		return brand;
-	}
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
-		this.remark = remark;
 	}
 	public Date getCreateTime() {
 		return createTime;

@@ -1,14 +1,39 @@
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id自增',
-  `price` decimal(11,2) DEFAULT NULL COMMENT '最新价格',
   `goods_no` varchar(16) DEFAULT NULL COMMENT '商品编号',
-  `goods_name` varchar(16) DEFAULT NULL COMMENT '商品名称',
-  `brand` varchar(64) DEFAULT NULL COMMENT '品牌',
-  `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
+  `goods_name` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `goods_py_name` varchar(255) DEFAULT NULL COMMENT '拼音',
+  `goods_short_py_name` varchar(255) DEFAULT NULL COMMENT '拼音简写',
   `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `creator` varchar(255) DEFAULT NULL COMMENT '创建人',
   `update_time` date DEFAULT NULL COMMENT '修改时间',
+  `updater` varchar(255) DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`goods_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `goods_price`;
+CREATE TABLE `goods_price` (
+  `price_id`  int NOT NULL AUTO_INCREMENT ,
+  `goods_id`  int NULL ,
+  `brand_id`  int NULL ,
+  `price`  decimal(10,2) NULL,
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `creator` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `update_time` date DEFAULT NULL COMMENT '修改时间',
+  `updater` varchar(255) DEFAULT NULL COMMENT '修改人',
+  PRIMARY KEY (`price_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `goods_brand`;
+CREATE TABLE `goods_brand` (
+  `brand_id`  int NOT NULL AUTO_INCREMENT ,
+  `brand_name`  varchar(255) NULL ,
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `creator` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `update_time` date DEFAULT NULL COMMENT '修改时间',
+  `updater` varchar(255) DEFAULT NULL COMMENT '修改人',
+  PRIMARY KEY (`brand_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `income_log`;

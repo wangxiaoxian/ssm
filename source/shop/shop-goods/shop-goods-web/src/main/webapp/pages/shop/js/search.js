@@ -11,33 +11,22 @@ define(function (require, exports, module) {
             _this.bindAutoComplete();
         },
         bindAutoComplete : function() {
-            var availableTags = [
-                "ActionScript",
-                "AppleScript",
-                "Asp",
-                "BASIC",
-                "C",
-                "C++",
-                "Clojure",
-                "COBOL",
-                "ColdFusion",
-                "Erlang",
-                "Fortran",
-                "Groovy",
-                "Haskell",
-                "Java",
-                "JavaScript",
-                "Lisp",
-                "Perl",
-                "PHP",
-                "Python",
-                "Ruby",
-                "Scala",
-                "Scheme"
-            ];
             $("#main_form input[name='goodsSearchName']").autocomplete({
-                source: root + '/goods/queryByName.ajax'
-                //source: availableTags
+                minLength: 1,
+                source: function(request, response) {
+                    common.sendAjax({
+                        "url": root + '/goods/queryByName.ajax',
+                        "data": {"goodsSearchName" : request.term},
+                        "success": function(resp) {
+                            response($.map(resp.data, function( item ) {
+                                return {
+                                    label: item.goodsName + (item.price ? "(" + item.price + "元/斤)" : ""),
+                                    value: item.goodsName
+                                }
+                            }));
+                        }
+                    });
+                }
             });
         }
     };
