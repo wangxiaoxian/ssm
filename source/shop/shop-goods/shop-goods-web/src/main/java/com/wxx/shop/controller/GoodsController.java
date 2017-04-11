@@ -12,14 +12,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.wxx.shop.WebResult;
+import com.wxx.shop.common.WebResult;
 import com.wxx.shop.model.Goods;
 import com.wxx.shop.service.GoodsService;
 
@@ -49,7 +48,7 @@ public class GoodsController {
 	public WebResult queryByName(String goodsSearchName) {
 		WebResult wr = new WebResult();
 		try {
-			List<Goods> goods = goodsService.queryByName(goodsSearchName);
+			List<String> goods = goodsService.queryByName(goodsSearchName);
 			wr.setData(goods);
 		} catch (Exception e) {
 			LOGGER.error("根据名称查询异常", e);

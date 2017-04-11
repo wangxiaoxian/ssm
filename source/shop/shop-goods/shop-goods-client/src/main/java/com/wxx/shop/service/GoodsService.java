@@ -19,5 +19,5 @@ public interface GoodsService {
 
 	List<Goods> queryPage(Goods condition);
 
-	List<Goods> queryByName(String goodsSearchName);
+	List<String> queryByName(String goodsSearchName);
 }

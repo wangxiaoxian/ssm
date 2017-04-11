@@ -20,8 +20,8 @@ define(function (require, exports, module) {
                         "success": function(resp) {
                             response($.map(resp.data, function( item ) {
                                 return {
-                                    label: item.goodsName + (item.price ? "(" + item.price + "元/斤)" : ""),
-                                    value: item.goodsName
+                                    label: item,
+                                    value: item
                                 }
                             }));
                         }

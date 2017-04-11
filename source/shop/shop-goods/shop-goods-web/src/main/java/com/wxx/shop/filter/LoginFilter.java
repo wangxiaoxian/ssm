@@ -1,4 +1,4 @@
-package com.wxx.shop.controller.filter;
+package com.wxx.shop.filter;
 
 import java.io.IOException;
 

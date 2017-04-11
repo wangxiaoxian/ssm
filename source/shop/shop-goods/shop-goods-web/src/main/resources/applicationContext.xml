@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
- xmlns:context="http://www.springframework.org/schema/context"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:p="http://www.springframework.org/schema/p"
- xmlns:util="http://www.springframework.org/schema/util"
- xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context-3.2.xsd
       http://www.springframework.org/schema/util
-      http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+      http://www.springframework.org/schema/util/spring-util-3.2.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
     <util:properties id="sysProp" location="file:${user.dir}/config/system.properties" />
+    <util:properties id="redisProp" location="file:${user.dir}/config/redis.properties" />
 
     <context:property-placeholder location="file:${user.dir}/config/redis.properties,
         file:${user.dir}/config/jdbc.properties"/>
@@ -20,46 +23,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
     
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
-        <property name="maxTotal" value="${redis.maxTotal}"></property>  
-        <property name="maxIdle" value="${redis.maxIdle}"></property>  
-        <property name="minIdle" value="${redis.minIdle}"></property>  
-        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"></property>  
-        <property name="minEvictableIdleTimeMillis" value="300000"></property>  
-        <property name="numTestsPerEvictionRun" value="3"></property>  
-        <property name="timeBetweenEvictionRunsMillis" value="60000"></property>  
-        <property name="testOnBorrow" value="true"></property>  
-        <property name="testOnReturn" value="true"></property>  
-        <property name="testWhileIdle" value="true"></property>  
-    </bean>
-    
-    <bean id="jedisConnectionFactory" 
-        class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-        destroy-method="destroy">
-    	<property name="hostName" value="${redis.host}"/>
-    	<property name="port" value="${redis.port}"/>
-    	<property name="password" value="${redis.password}" />
-    	<property name="timeout" value="${redis.timeout}"/>
-    	<property name="usePool" value="true"/>
-    	<property name="poolConfig" ref="jedisPoolConfig" />
-    </bean>
-
-    <!-- redis template definition -->
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-        p:connectionFactory-ref="jedisConnectionFactory">
-        <property name="keySerializer">
-           <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-        </property>  
-        <property name="hashKeySerializer">  
-           <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-        </property>
-        <property name="valueSerializer">  
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />  
-        </property>  
-        <property name="hashValueSerializer">  
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />  
-        </property>
-    </bean>
+    <import resource="spring-redis.xml"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init"
@@ -98,6 +62,12 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
           p:basePackage="com.wxx.**.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
+
+    <aop:config>
+        <!--切入点-->
+        <aop:pointcut id="methodPoint" expression="execution(* com.wxx.shop.service.impl.*.*(..)) "/><!--在该切入点使用自定义拦截器-->
+        <aop:advisor pointcut-ref="methodPoint" advice-ref="queryGoodsNameCacheInterceptor"/>
+    </aop:config>
 
     <!-- 对数据源进行事务管理 -->
     <bean id="transactionManager"

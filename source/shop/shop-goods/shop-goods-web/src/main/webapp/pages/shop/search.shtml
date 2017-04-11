@@ -38,7 +38,7 @@
     <div class="am-g">
         <div class="am-u-lg-12">
             <form id="main_form" class="am-form">
-            <div class="main_input"><input type="text" name="goodsSearchName" placeholder="输入商品名\拼音"></div>
+            <div class="main_input"><input type="text" name="goodsSearchName" style="height: 35px;" placeholder="输入商品名\拼音"></div>
             <p>
                 <a href="http://amazeui.org" class="am-btn am-btn-default am-btn-default">搜&nbsp;&nbsp;索</a>
             </p>
