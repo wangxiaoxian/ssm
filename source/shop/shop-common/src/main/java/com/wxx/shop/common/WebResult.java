@@ -1,4 +1,4 @@
-package com.wxx.shop;
+package com.wxx.shop.common;
 
 /**
  * Created by wangxiaoxian on 2017/4/7.
