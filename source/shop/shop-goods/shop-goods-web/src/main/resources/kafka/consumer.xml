@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+       xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka-2.0.xsd
+        http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <int-kafka:message-driven-channel-adapter
+            id="kafkaListener"
+            listener-container="container1"
+            auto-startup="false"
+            phase="100"
+            send-timeout="5000"
+            channel="nullChannel"
+            error-channel="errorChannel" />
+
+    <bean id="container1" class="org.springframework.kafka.listener.KafkaMessageListenerContainer">
+        <constructor-arg>
+            <bean class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">
+                <constructor-arg index="0">
+                    <map>
+                        <!--更多参数请见kafka.consumer.ConsumerConfig-->
+                        <entry key="bootstrap.servers" value="${broker.address}" />
+                    </map>
+                </constructor-arg>
+                <constructor-arg index="1">
+                    <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
+                </constructor-arg>
+                <constructor-arg index="2">
+                    <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="org.springframework.kafka.listener.config.ContainerProperties">
+                <constructor-arg>
+                    <array>
+                        <value>test</value>
+                    </array>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

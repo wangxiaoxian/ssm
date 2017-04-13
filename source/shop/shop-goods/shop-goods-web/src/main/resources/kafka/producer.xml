@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+       xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka-2.0.xsd
+        http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 生产消息 -->
+    <int:channel id="inputToKafka"></int:channel>
+
+    <!--<int-kafka:outbound-channel-adapter kafka-template="kafkaTemplate"  channel="inputToKafka" topic="test"/>-->
+    <int-kafka:outbound-channel-adapter id="kafkaOutboundChannelAdapter"
+                                        kafka-template="kafkaTemplate"
+                                        auto-startup="false"
+                                        channel="inputToKafka"
+                                        topic="test"
+                                        message-key-expression="'bar'"
+                                        partition-id-expression="2">
+    </int-kafka:outbound-channel-adapter>
+
+    <bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
+        <constructor-arg index="0" ref="producerFactory"></constructor-arg>
+    </bean>
+
+    <bean id="producerFactory" class="org.springframework.kafka.core.DefaultKafkaProducerFactory">
+        <constructor-arg index="0">
+            <!--更多参数请见kafka.producer.ProducerConfig-->
+            <map>
+                <entry key="bootstrap.servers" value="${broker.address}"/>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
+        </constructor-arg>
+    </bean>
+</beans>

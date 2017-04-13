@@ -110,7 +110,22 @@
 			<artifactId>commons-pool2</artifactId>
 			<version>2.4.1</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<!-- spring核心包 -->
 		<!-- springframework start -->
 		<dependency>
@@ -238,6 +253,11 @@
 			<artifactId>spring-integration-kafka</artifactId>
 			<version>2.0.1.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.11</artifactId>
+			<version>0.9.0.1</version>
+		</dependency>
 
 		<!-- junit测试包 -->
 		<dependency>
@@ -347,5 +367,6 @@
 		<module>shop-goods</module>
 		<module>shop-common</module>
 		<module>shop-cache</module>
+		<module>shop-kafka</module>
 	</modules>
 </project>
