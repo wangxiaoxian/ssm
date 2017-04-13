@@ -7,6 +7,9 @@ import java.util.List;
 import com.wxx.shop.cache.RedisUtil;
 import com.wxx.shop.model.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Service;
 
 import com.wxx.shop.dao.GoodsDao;
@@ -20,6 +23,9 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsDao goodsDao;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	@Qualifier("inputToKafka")
+	private MessageChannel messageChannel;
 
 	@Override
 	public List<Goods> queryPage(Goods condition) {
@@ -34,7 +40,8 @@ public class GoodsServiceImpl implements GoodsService {
 		if (StringUtils.isEmpty(result)) {
 			return Collections.EMPTY_LIST;
 		}
-		return Arrays.asList(result.split(","));
-//		return goodsDao.queryByName(goodsSearchName);
+		List<String> list = Arrays.asList(result.split(","));
+		messageChannel.send(new GenericMessage<>("producer say: .....query....."));
+		return list;
 	}
 }
