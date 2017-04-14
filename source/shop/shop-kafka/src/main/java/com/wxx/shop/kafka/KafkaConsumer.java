@@ -16,7 +16,7 @@ import org.springframework.messaging.Message;
  */
 public class KafkaConsumer {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-consumer.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         QueueChannel queueChannel = (QueueChannel) context.getBean("inputFromKafka");
         Message msg = null;
         while ((msg = queueChannel.receive(-1)) != null) {
@@ -24,5 +24,4 @@ public class KafkaConsumer {
             System.out.println(map);
         }
     }
-
 }

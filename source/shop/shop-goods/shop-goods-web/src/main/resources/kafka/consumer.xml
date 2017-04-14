@@ -7,9 +7,6 @@
         http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <int:channel id="inputFromKafka">
-        <int:queue/>
-    </int:channel>
 
     <int-kafka:message-driven-channel-adapter
             id="kafkaListener"
@@ -17,7 +14,7 @@
             auto-startup="false"
             phase="100"
             send-timeout="5000"
-            channel="nullChannel"
+            channel="inputToKafka"
             error-channel="errorChannel" />
 
     <bean id="container1" class="org.springframework.kafka.listener.KafkaMessageListenerContainer">
@@ -30,10 +27,10 @@
                     </map>
                 </constructor-arg>
                 <constructor-arg index="1">
-                    <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
+                    <bean class="org.apache.kafka.common.serialization.StringDeserializer"></bean>
                 </constructor-arg>
                 <constructor-arg index="2">
-                    <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
+                    <bean class="org.apache.kafka.common.serialization.StringDeserializer"></bean>
                 </constructor-arg>
             </bean>
         </constructor-arg>
