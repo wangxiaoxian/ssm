@@ -367,6 +367,6 @@
 		<module>shop-goods</module>
 		<module>shop-common</module>
 		<module>shop-cache</module>
-		<module>shop-kafka</module>
+		<module>shop-mq</module>
 	</modules>
 </project>
