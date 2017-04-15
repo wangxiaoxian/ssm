@@ -31,7 +31,7 @@
 	  </dependency>
 	  <dependency>
 		  <groupId>com.wxx.shop</groupId>
-		  <artifactId>shop-kafka</artifactId>
+		  <artifactId>shop-mq</artifactId>
 		  <version>1.0.0</version>
 	  </dependency>
   </dependencies>
