@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.wxx.shop.cache.RedisUtil;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -21,7 +22,7 @@ import java.util.List;
  * 给不同的方法来加入判断如果缓存存在数据，从缓存取数据。否则第一次从数据库取，并将结果保存到缓存 中去
  * Created by wangxiaoxian on 2017/4/11.
  */
-@Service("queryGoodsNameInterceptor")
+@Component("queryGoodsNameInterceptor")
 public class QueryGoodsNameInterceptor implements MethodInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryGoodsNameInterceptor.class);
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -14,7 +14,7 @@ import javax.annotation.PreDestroy;
 /**
  * Created by wangxiaoxian on 2017/4/15.
  */
-@Service
+@Component
 public class GoodsConsumer extends KafkaConsumer {
 
     @Autowired
