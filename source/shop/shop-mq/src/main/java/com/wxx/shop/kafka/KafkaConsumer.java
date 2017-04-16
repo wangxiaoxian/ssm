@@ -13,17 +13,9 @@ import java.util.concurrent.Executors;
  * @author wangxiaoxian
  * @version $v:1.0.0, $time:2017-04-13, $id:KafkaConsumer.java, Exp $
  */
-public abstract class KafkaConsumer {
+public interface KafkaConsumer {
 
-    protected ExecutorService executorService;
+    void init();
 
-    protected void init(int threadNum) {
-        executorService = Executors.newFixedThreadPool(threadNum);
-    }
-
-    protected void destroy() {
-        if (executorService != null) {
-            executorService.shutdown();
-        }
-    }
+    void destroy();
 }

@@ -3,8 +3,8 @@
 redis-server redis.conf
 
 2、启动zookeeper：
-zkServer.sh start
+./zkServer.sh start
 注:windows环境下不需要start参数
 
 3、启动kafka
-bin/kafka-server-start.sh config/server.properties
+./bin/kafka-server-start.sh ./config/server.properties

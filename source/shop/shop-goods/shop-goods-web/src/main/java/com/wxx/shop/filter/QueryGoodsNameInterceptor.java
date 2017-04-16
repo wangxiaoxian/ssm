@@ -1,6 +1,7 @@
 package com.wxx.shop.filter;
 
 import com.wxx.shop.dao.GoodsDao;
+import com.wxx.shop.constenum.GoodsChannelEnum;
 import com.wxx.shop.model.Goods;
 import com.wxx.shop.service.impl.GoodsServiceImpl;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -8,11 +9,13 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.wxx.shop.cache.RedisUtil;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
@@ -32,6 +35,9 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
     private GoodsDao goodsDao;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    @Qualifier(GoodsChannelEnum.GOODS_CHANNEL)
+    private MessageChannel messageChannel;
 
     @Value("#{redisProp['redis.defaultCacheExpireTime']}")
     private Long defaultCacheExpireTime; // 缓存默认的过期时间
@@ -41,6 +47,8 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
 
         String queryParam = invocation.getArguments()[0].toString();
         String key = GoodsServiceImpl.QUERY_GOODS_NAME_KEY_PREFIX + queryParam;
+
+        logQueryParam(queryParam);
 
         if (redisUtil.exists(key)) {
             LOGGER.info("找到缓存数据");
@@ -55,9 +63,14 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
         return invocation.proceed();
     }
 
+    private void logQueryParam(String goodsSearchName) {
+        messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader("messageKey", "bar")
+                .setHeader("topic", "test").build());
+    }
+
     private boolean set2Redis(String queryParam, List<Goods> goodsList) {
         if (CollectionUtils.isEmpty(goodsList)) {
-            LOGGER.info("集合为空，不设置缓存，直接返回true");
+            LOGGER.info("数据库找不到查询结果，无法缓存");
             return true;
         }
         StringBuffer value = new StringBuffer();

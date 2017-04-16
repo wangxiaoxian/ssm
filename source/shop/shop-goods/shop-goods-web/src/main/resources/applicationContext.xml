@@ -17,7 +17,9 @@
     <util:properties id="redisProp" location="file:${user.dir}/config/redis.properties" />
 
     <context:property-placeholder location="file:${user.dir}/config/redis.properties,
-        file:${user.dir}/config/jdbc.properties,file:${user.dir}/config/kafka.properties"/>
+        file:${user.dir}/config/jdbc.properties,
+        file:${user.dir}/config/kafka.properties,
+        file:${user.dir}/config/threadPool.properties"/>
 
     <context:component-scan base-package="com.wxx">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
@@ -76,5 +78,7 @@
 
     <import resource="kafka/consumer.xml"/>
     <import resource="kafka/producer.xml"/>
+
+    <import resource="spring-threadPool.xml"/>
 
 </beans>

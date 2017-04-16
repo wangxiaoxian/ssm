@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.wxx.shop.kafka.constenum.GoodsChannelEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.integration.support.MessageBuilder;
-import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -24,9 +20,6 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsDao           goodsDao;
     @Autowired
     private RedisUtil          redisUtil;
-    @Autowired
-    @Qualifier(GoodsChannelEnum.GOODS_CHANNEL)
-    private MessageChannel     messageChannel;
 
     @Override
     public List<Goods> queryPage(Goods condition) {
@@ -37,9 +30,6 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<String> queryByName(String goodsSearchName) {
-        messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader("messageKey", "bar")
-                .setHeader("topic", "test").build());
-
         String result = (String) redisUtil.get(QUERY_GOODS_NAME_KEY_PREFIX + goodsSearchName);
         if (StringUtils.isEmpty(result)) {
             return Collections.EMPTY_LIST;
