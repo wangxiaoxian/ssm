@@ -22,7 +22,7 @@
             <bean class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">
                 <constructor-arg index="0">
                     <map>
-                        <!--更多参数请见kafka.consumer.ConsumerConfig-->
+                        <!--更多参数请见kafka.consumer.ConsumerConfig -->
                         <entry key="bootstrap.servers" value="${broker.address}" />
                     </map>
                 </constructor-arg>
@@ -36,6 +36,7 @@
         </constructor-arg>
         <constructor-arg>
             <bean class="org.springframework.kafka.listener.config.ContainerProperties">
+                <!--设置topic-->
                 <constructor-arg>
                     <array>
                         <value>test</value>

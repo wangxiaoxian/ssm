@@ -1,4 +1,4 @@
-本系统需要以下初始化步骤：
+本系统需要以按顺序执行以下初始化步骤：
 1、启动redis：
 redis-server redis.conf
 

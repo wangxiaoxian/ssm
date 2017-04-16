@@ -2,7 +2,6 @@ package com.wxx.shop.filter;
 
 import com.wxx.shop.dao.GoodsDao;
 import com.wxx.shop.model.Goods;
-import com.wxx.shop.service.GoodsService;
 import com.wxx.shop.service.impl.GoodsServiceImpl;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -10,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 
 import com.wxx.shop.cache.RedisUtil;
 import org.springframework.stereotype.Service;
@@ -23,9 +21,9 @@ import java.util.List;
  * 给不同的方法来加入判断如果缓存存在数据，从缓存取数据。否则第一次从数据库取，并将结果保存到缓存 中去
  * Created by wangxiaoxian on 2017/4/11.
  */
-@Service("queryGoodsNameCacheInterceptor")
-public class QueryGoodsNameCacheInterceptor implements MethodInterceptor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(QueryGoodsNameCacheInterceptor.class);
+@Service("queryGoodsNameInterceptor")
+public class QueryGoodsNameInterceptor implements MethodInterceptor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(QueryGoodsNameInterceptor.class);
 
     private static final Long EXPIRE_TIME = 6000L;//过期时间，单位秒
 

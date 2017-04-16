@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 Aspire Tech,Inc. All rights reserved.
  */
-package com.wxx.shop.kafka;
+package com.wxx.shop.kafka.demo;
 
 /**
  * kafka生产者

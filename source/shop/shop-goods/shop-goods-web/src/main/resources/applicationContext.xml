@@ -22,11 +22,6 @@
     <context:component-scan base-package="com.wxx">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
-    
-    <import resource="spring-redis.xml"/>
-
-    <import resource="kafka/consumer.xml"/>
-    <import resource="kafka/producer.xml"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init"
@@ -69,11 +64,17 @@
     <aop:config>
         <!--切入点-->
         <aop:pointcut id="methodPoint" expression="execution(* com.wxx.shop.service.impl.GoodsServiceImpl.queryByName(..)) "/><!--在该切入点使用自定义拦截器-->
-        <aop:advisor pointcut-ref="methodPoint" advice-ref="queryGoodsNameCacheInterceptor"/>
+        <aop:advisor pointcut-ref="methodPoint" advice-ref="queryGoodsNameInterceptor"/>
     </aop:config>
 
     <!-- 对数据源进行事务管理 -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
+
+    <import resource="spring-redis.xml"/>
+
+    <import resource="kafka/consumer.xml"/>
+    <import resource="kafka/producer.xml"/>
+
 </beans>

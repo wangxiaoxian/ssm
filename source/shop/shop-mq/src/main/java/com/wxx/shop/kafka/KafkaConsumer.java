@@ -3,10 +3,9 @@
  */
 package com.wxx.shop.kafka;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.integration.channel.QueueChannel;
-import org.springframework.messaging.Message;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * kafka消费者
@@ -14,14 +13,17 @@ import org.springframework.messaging.Message;
  * @author wangxiaoxian
  * @version $v:1.0.0, $time:2017-04-13, $id:KafkaConsumer.java, Exp $
  */
-public class KafkaConsumer {
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        QueueChannel queueChannel = (QueueChannel) context.getBean("inputFromKafka");
-        Message msg = null;
-        while ((msg = queueChannel.receive(-1)) != null) {
-            String map = (String) msg.getPayload();
-            System.out.println(map);
+public abstract class KafkaConsumer {
+
+    protected ExecutorService executorService;
+
+    protected void init(int threadNum) {
+        executorService = Executors.newFixedThreadPool(threadNum);
+    }
+
+    protected void destroy() {
+        if (executorService != null) {
+            executorService.shutdown();
         }
     }
 }

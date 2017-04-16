@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.wxx.shop.kafka.constenum.GoodsChannelEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.support.MessageBuilder;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -26,11 +25,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private RedisUtil          redisUtil;
     @Autowired
-    @Qualifier("inputToKafka")
+    @Qualifier(GoodsChannelEnum.GOODS_CHANNEL)
     private MessageChannel     messageChannel;
-    @Autowired
-    @Qualifier("inputToKafka")
-    private QueueChannel       queueChannel;
 
     @Override
     public List<Goods> queryPage(Goods condition) {
@@ -41,22 +37,14 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<String> queryByName(String goodsSearchName) {
+        messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader("messageKey", "bar")
+                .setHeader("topic", "test").build());
+
         String result = (String) redisUtil.get(QUERY_GOODS_NAME_KEY_PREFIX + goodsSearchName);
         if (StringUtils.isEmpty(result)) {
             return Collections.EMPTY_LIST;
         }
         List<String> list = Arrays.asList(result.split(","));
-        messageChannel.send(MessageBuilder.withPayload("hello=" + goodsSearchName).setHeader("messageKey", "bar")
-            .setHeader("topic", "test").build());
-		consume();
         return list;
-    }
-
-    public void consume() {
-        Message msg = null;
-        while ((msg = queueChannel.receive(-1)) != null) {
-            String map = (String) msg.getPayload();
-            System.out.println(map);
-        }
     }
 }
