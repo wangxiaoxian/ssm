@@ -15,6 +15,7 @@
 		<slf4j.version>1.6.6</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<project.deploy.directory>./target</project.deploy.directory>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<!-- 打包后发到哪个仓库，一般release和snapshot版本是发到不同的库
@@ -174,12 +175,12 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>aspectj</groupId>
+			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.5.4</version>
 		</dependency>
 		<dependency>
-			<groupId>aspectj</groupId>
+			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.5.4</version>
 		</dependency>
@@ -331,6 +332,7 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!--mybatis分页插件-->
 			<plugin>
 		        <groupId>org.mybatis.generator</groupId>
 		        <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -343,15 +345,32 @@
 		            <overwrite>true</overwrite>
 		        </configuration>
 		    </plugin>
+			<!--java文件编译配置的插件-->
 		    <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 	            <configuration>
 	                <source>1.7</source>
 	                <target>1.7</target>
-					<encoding>UTF8</encoding>
+					<encoding>${project.build.sourceEncoding}</encoding>
 	            </configuration>
 	        </plugin>
+			<!--指定资源目录插件-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>src/main/resources</directory>
+						</resource>
+					</resources>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!--打包插件-->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.5.3</version>
@@ -362,6 +381,18 @@
 						<descriptor>release.xml</descriptor>
 					</descriptors>
 				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<!--绑定到生命周期-->
+						<!--
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						-->
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

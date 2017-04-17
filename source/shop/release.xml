@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+	<id>all</id>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<formats>
+		<!--最终的输出格式-->
+		<format>dir</format>
+	</formats>
+
+	<fileSets>
+		<!--定义代码目录中与输出目录的映射-->
+		<fileSet>
+			<directory>shop_kernel</directory>
+			<outputDirectory>shop_kernel/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			 <directory>bin</directory>
+			 <outputDirectory>shop_kernel/goods/</outputDirectory>
+			 <includes>
+				<include>goods_start.bat</include>
+				<include>goods_start.sh</include>
+				<include>goods_stop.sh</include>
+			 </includes>
+		</fileSet>
+		<!--
+		<fileSet>
+			  <directory>bin</directory>
+			  <outputDirectory>shop_kernel/mq/</outputDirectory>
+			  <includes>
+				<include>mq_start.bat</include>
+				<include>mq_start.sh</include>
+				<include>mq_stop.sh</include>
+			  </includes>
+		</fileSet>
+		-->
+		<fileSet>
+		  <directory>shop-goods/shop-goods-web/target</directory>
+		  <outputDirectory>shop_kernel/interface-web/</outputDirectory>
+		  <includes>
+			<include>*.war</include>
+		  </includes>
+		</fileSet>
+		<fileSet>
+			<directory>ReleaseNotes</directory>
+			<outputDirectory>shop_kernel/ReleaseNotes/</outputDirectory>
+			<includes>
+				<include>SHOP_Kernel_ReleaseNote.txt</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+	<moduleSets>
+		<moduleSet>
+			<includes><!--公共的module-->
+				<include>com.wxx.shop:shop-common</include>
+			</includes>
+			<binaries>
+				<outputDirectory>shop_kernel/shop/lib</outputDirectory><!--  公共的jar输出目录  -->
+				<unpack>false</unpack>
+				<dependencySets>
+					<dependencySet>
+						<excludes><!--  过滤掉所有的依赖，依赖在最后一个moduleSet中统一输出  -->
+							<exclude>*:logback*</exclude>
+							<exclude>*:log4j-over*</exclude>
+						</excludes>
+					</dependencySet>
+				</dependencySets>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+			<includes>
+				<include>com.wxx.shop:shop-common</include>
+				<include>com.wxx.shop:shop-goods-client</include>
+				<include>com.wxx.shop:shop-goods-service</include>
+			</includes>
+			<binaries>
+				<outputDirectory>shop_kernel/goods/lib/</outputDirectory>
+				<unpack>false</unpack>
+				<dependencySets>
+					<dependencySet>
+						<excludes><!--过滤相关依赖-->
+							<exclude>*:logback*</exclude>
+							<exclude>*:log4j-over*</exclude>
+						</excludes>
+						<outputDirectory>shop_kernel/goods/lib/thirdparty/</outputDirectory><!--  依赖的第三方jar输出目录  -->
+					</dependencySet>
+				</dependencySets>
+			</binaries>
+		</moduleSet>
+	</moduleSets>
+</assembly>
