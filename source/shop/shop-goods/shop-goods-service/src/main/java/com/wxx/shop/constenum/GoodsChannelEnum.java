@@ -5,6 +5,7 @@ package com.wxx.shop.constenum;
  */
 public interface GoodsChannelEnum {
 
-    String GOODS_CHANNEL = "inputToKafka";
+    String GOODS_CHANNEL_PRODUCER = "inputToKafka";
+    String GOODS_CHANNEL_CONSUMER = "inputFromKafka";
 
 }

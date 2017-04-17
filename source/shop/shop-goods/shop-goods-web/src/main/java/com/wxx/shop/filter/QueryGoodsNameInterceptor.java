@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.wxx.shop.cache.RedisUtil;
 import org.springframework.integration.support.MessageBuilder;
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +37,7 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
     @Autowired
     private RedisUtil redisUtil;
     @Autowired
-    @Qualifier(GoodsChannelEnum.GOODS_CHANNEL)
+    @Qualifier(GoodsChannelEnum.GOODS_CHANNEL_PRODUCER)
     private MessageChannel messageChannel;
 
     @Value("#{redisProp['redis.defaultCacheExpireTime']}")
@@ -64,8 +65,8 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
     }
 
     private void logQueryParam(String goodsSearchName) {
-        messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader("messageKey", "bar")
-                .setHeader("topic", "test").build());
+        messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader(KafkaHeaders.MESSAGE_KEY, "key")
+                .setHeader(KafkaHeaders.TOPIC, "goods").build());
     }
 
     private boolean set2Redis(String queryParam, List<Goods> goodsList) {

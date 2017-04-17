@@ -12,35 +12,39 @@
         <int:queue/>
     </int:channel>
 
-    <!--<int-kafka:outbound-channel-adapter kafka-template="kafkaTemplate"  channel="inputToKafka" topic="test"/>-->
+    <!-- auto-startup容器刷新的时候，是否启动该适配器类 -->
     <int-kafka:outbound-channel-adapter id="kafkaOutboundChannelAdapter"
                                         kafka-template="kafkaTemplate"
-                                        auto-startup="false"
-                                        channel="inputToKafka"
-                                        topic="foo"
-                                        message-key-expression="'bar'"
-                                        partition-id-expression="2">
-        <int:poller default="true" fixed-delay="50"/>
+                                        auto-startup="true"
+                                        channel="inputToKafka">
+        <int:poller default="true" fixed-delay="50" time-unit="MILLISECONDS"/>
     </int-kafka:outbound-channel-adapter>
 
     <bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
         <constructor-arg>
             <bean class="org.springframework.kafka.core.DefaultKafkaProducerFactory">
                 <constructor-arg index="0">
-                    <!--更多参数请见kafka.producer.ProducerConfig-->
+                    <!--更多参数请见org.apache.kafka.clients.producer.ProducerConfig-->
                     <map>
                         <entry key="bootstrap.servers" value="${broker.address}"/>
+                        <!--#消息的确认模式
+                            # 0：不保证消息的到达确认，只管发送，低延迟但是会出现消息的丢失，在某个server失败的情况下，有点像TCP
+                            # 1：发送消息，并会等待leader 收到确认后，一定的可靠性
+                            # -1：发送消息，等待leader收到确认，并进行复制操作后，才返回，最高的可靠性-->
+                        <entry key="acks" value="all"/>
+                        <!--发送失败的重试次数-->
+                        <entry key="retries" value="3"/>
+                        <!--一次批量发送给broker的大小-->
+                        <entry key="batch.size" value="16384"/>
+                        <!--发送给broker的延迟，以累计更大的批量发送-->
+                        <entry key="linger.ms" value="1"/>
+                        <!--发送给broker前的缓存大小-->
+                        <entry key="buffer.memory" value="33554432"/>
+                        <entry key="key.serializer" value="org.apache.kafka.common.serialization.StringSerializer"></entry>
+                        <entry key="value.serializer" value="org.apache.kafka.common.serialization.StringSerializer"></entry>
                     </map>
-                </constructor-arg>
-                <constructor-arg index="1">
-                    <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
-                </constructor-arg>
-                <constructor-arg index="2">
-                    <bean class="org.apache.kafka.common.serialization.StringSerializer"></bean>
                 </constructor-arg>
             </bean>
         </constructor-arg>
     </bean>
-
-
 </beans>

@@ -13,7 +13,7 @@
         <property name ="keepAliveSeconds" value ="${threadPool.keepAliveSeconds}" />
         <!-- 线程池所使用的缓冲队列 -->
         <property name ="queueCapacity" value ="${threadPool.queueCapacity}" />
-        <!-- 用来拒绝一个任务的执行 -->
+        <!-- 无法执行任务时的策略 -->
         <property name="rejectedExecutionHandler">
             <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"></bean>
         </property>

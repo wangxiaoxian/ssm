@@ -6,5 +6,6 @@ redis-server redis.conf
 ./zkServer.sh start
 注:windows环境下不需要start参数
 
-3、启动kafka
+3、启动并配置kafka
 ./bin/kafka-server-start.sh ./config/server.properties
+./config/server.properties增加或修改配置项auto.create.topics.enable=true，使之创建消息的时候可以自动创建topic
