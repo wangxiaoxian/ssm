@@ -7,38 +7,35 @@
 		<Property name="backup.filename">%d{yyyy-MM-dd}-%i.log</Property>
 		<Property name="maxsize">100MB</Property>
 	</Properties>
-	<!--先定义所有的appender-->
+
 	<Appenders>
-		<!--这个输出控制台的配置-->
 		<Console name="Console" target="SYSTEM_OUT">
-			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
 			<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
-			<!--这个都知道是输出日志的格式-->
 			<PatternLayout pattern="${append.pattern}"/>
 		</Console>
 
-		<RollingFile name="debug" fileName="${base.dir}/debug/debug.log"
+		<RollingFile name="Debug" fileName="${base.dir}/debug/debug.log"
 					 filePattern="${base.dir}/debug/backup/debug-${backup.filename}">
 			<PatternLayout pattern="${append.pattern}"/>
 			<SizeBasedTriggeringPolicy size="${maxsize}"/>
 		</RollingFile>
-		<RollingFile name="info" fileName="${base.dir}/info/info.log"
+		<RollingFile name="Info" fileName="${base.dir}/info/info.log"
 					 filePattern="${base.dir}/info/backup/info-${backup.filename}">
 			<PatternLayout pattern="${append.pattern}"/>
 			<SizeBasedTriggeringPolicy size="${maxsize}"/>
 		</RollingFile>
-		<RollingFile name="warn" fileName="${base.dir}/warn/warn.log"
+		<RollingFile name="Warn" fileName="${base.dir}/warn/warn.log"
 					 filePattern="${base.dir}/warn/backup/warn-${backup.filename}">
 			<PatternLayout pattern="${append.pattern}"/>
 			<SizeBasedTriggeringPolicy size="${maxsize}"/>
 		</RollingFile>
-		<RollingFile name="error" fileName="${base.dir}/error/error.log"
+		<RollingFile name="Error" fileName="${base.dir}/error/error.log"
 					 filePattern="${base.dir}/error/backup/error-${backup.filename}">
 			<PatternLayout pattern="${append.pattern}"/>
 			<SizeBasedTriggeringPolicy size="${maxsize}"/>
 		</RollingFile>
 	</Appenders>
-	<!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+
 	<Loggers>
 		<!--kafka-->
 		<Logger name="org.apache.kafka.clients.consumer.internals.ConsumerCoordinator" level="info" additivity="false">
@@ -65,13 +62,16 @@
 			<AppenderRef ref="Console"/>
 		</Logger>
 
+		<!--本项目-->
 		<Logger name="com.wxx" level="debug" additivity="false">
 			<AppenderRef ref="Console"/>
 		</Logger>
 
-		<!--建立一个默认的root的logger-->
 		<Root level="debug">
-			<appender-ref ref="RollingFile"/>
+			<appender-ref ref="Debug"/>
+			<appender-ref ref="Info"/>
+			<appender-ref ref="Warn"/>
+			<appender-ref ref="Error"/>
 			<appender-ref ref="Console"/>
 		</Root>
 	</Loggers>
