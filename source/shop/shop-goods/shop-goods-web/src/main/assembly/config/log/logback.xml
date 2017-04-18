@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ==============================================================================================  -->
+<!--                                《说明》                                                        	 								 -->
+<!--  1、configuration 中 debug="true" 属性配置表示输出logback本身状态信息，当不需要时，可以去除此配置 	 -->
+<!--  2、自动重新加载配置：configuration 元素的 scan 属性为 true，当发生变化后进行重新配置，开发时建议用  	 -->
+<!-- =============================================================================================== -->
+<configuration debug="false" scan="false" scanPeriod="60 seconds">
+    <!-- 日志基准目录，相对于tomcat，也可定义绝对目录 -->
+	<substitutionProperty name="log.base" value="${user.dir}/logs" />
+	<!-- 备份目录 -->
+	<substitutionProperty name="log.backup" value="${log.base}/backup" />
+    <jmxConfigurator />
+    
+    <!-- 标准、缺省日志输出 把日志输出到控制台 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%-5level][%d{HH:mm:ss.SSS}][%logger{60}] %msg%n</pattern>
+		</layout>
+		<Encoding>UTF-8</Encoding>
+	</appender>
+	
+	<!-- 备份日志：为了生成备份目录 -->
+	<appender name="backup" class="ch.qos.logback.core.FileAppender">
+		<File>${log.backup}/test</File>
+		 <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[%-5level]: %date ：[%logger{80}] - %msg%n</Pattern>
+        </layout>
+	</appender>
+	
+	<appender name="info_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}/run/info.log</File>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%-5level]: %date ：[%thread] - [%logger{80}:%line] - %msg%n</pattern>
+		</layout>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${log.backup}/run/info.%d{yyyy-MM-dd}-%i.zip</FileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        		<maxFileSize>20MB</maxFileSize>
+      		</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	<appender name="debug_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}/debug/debug.log</File>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%-5level]: %date ：[%thread] - [%logger{80}:%line] - %msg%n</pattern>
+		</layout>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${log.backup}/debug/debug.%d{yyyy-MM-dd}-%i.zip</FileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        		<maxFileSize>20MB</maxFileSize>
+      		</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	<appender name="error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}/error/error.log</File>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%-5level]: %date ：[%thread] - [%logger{80}:%line] - %msg%n</pattern>
+		</layout>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${log.backup}/error/error.%d{yyyy-MM-dd}-%i.zip</FileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        		<maxFileSize>20MB</maxFileSize>
+      		</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	
+	<appender name="mybatis_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log.base}/sql/mybatis.log</File>
+		<append>true</append>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%-5level]: %date ：[%thread] - [%logger{80}:%line] - %msg%n</pattern>
+		</layout>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${log.backup}/sql/mybatis.%d{yyyy-MM-dd}-%i.zip</FileNamePattern>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        		<maxFileSize>20MB</maxFileSize>
+      		</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- 二级日志自定义  -->
+	<logger name="org.apache.kafka.clients.consumer.internals.ConsumerCoordinator" level="INFO" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger>
+	<logger name="org.springframework.kafka.listener.KafkaMessageListenerContainer" level="INFO" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger>
+	<logger name="org.springframework.integration.endpoint.PollingConsumer" level="INFO" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger>
+
+	<logger name="org.apache.ibatis" level="DEBUG" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger>
+	<logger name="org.apache.mybatis" level="DEBUG" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger>
+	<logger name="java.sql" level="DEBUG" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger>
+	<logger name="com.wxx" level="DEBUG" additivity="false">
+		<appender-ref ref="stdout" />
+	</logger>
+	
+	<!-- 全局日志级别及输出方案 -->
+	<root level="DEBUG"> 
+		<appender-ref ref="stdout" />
+	</root>
+</configuration>
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置 -->
+<Configuration status="info">
+	<Properties>
+		<Property name="append.pattern">%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger{70}#%method:%L [%-5level]- %msg%xEx%n</Property>
+		<Property name="base.dir">${sys:user.dir}/logs</Property>
+		<Property name="backup.filename">%d{yyyy-MM-dd}-%i.log</Property>
+		<Property name="maxsize">100MB</Property>
+	</Properties>
+	<!--先定义所有的appender-->
+	<Appenders>
+		<!--这个输出控制台的配置-->
+		<Console name="Console" target="SYSTEM_OUT">
+			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+			<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+			<!--这个都知道是输出日志的格式-->
+			<PatternLayout pattern="${append.pattern}"/>
+		</Console>
+
+		<RollingFile name="debug" fileName="${base.dir}/debug/debug.log"
+					 filePattern="${base.dir}/debug/backup/debug-${backup.filename}">
+			<PatternLayout pattern="${append.pattern}"/>
+			<SizeBasedTriggeringPolicy size="${maxsize}"/>
+		</RollingFile>
+		<RollingFile name="info" fileName="${base.dir}/info/info.log"
+					 filePattern="${base.dir}/info/backup/info-${backup.filename}">
+			<PatternLayout pattern="${append.pattern}"/>
+			<SizeBasedTriggeringPolicy size="${maxsize}"/>
+		</RollingFile>
+		<RollingFile name="warn" fileName="${base.dir}/warn/warn.log"
+					 filePattern="${base.dir}/warn/backup/warn-${backup.filename}">
+			<PatternLayout pattern="${append.pattern}"/>
+			<SizeBasedTriggeringPolicy size="${maxsize}"/>
+		</RollingFile>
+		<RollingFile name="error" fileName="${base.dir}/error/error.log"
+					 filePattern="${base.dir}/error/backup/error-${backup.filename}">
+			<PatternLayout pattern="${append.pattern}"/>
+			<SizeBasedTriggeringPolicy size="${maxsize}"/>
+		</RollingFile>
+	</Appenders>
+	<!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+	<Loggers>
+		<!--kafka-->
+		<Logger name="org.apache.kafka.clients.consumer.internals.ConsumerCoordinator" level="info" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatCompletionHandler" level="info" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer" level="info" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<Logger name="org.springframework.integration.endpoint.PollingConsumer" level="info" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+
+		<!--sql语句-->
+		<Logger name="org.apache.ibatis" level="debug" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<logger name="org.apache.mybatis" level="debug" additivity="false">
+			<AppenderRef ref="Console"/>
+		</logger>
+		<Logger name="java.sql" level="debug" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+
+		<Logger name="com.wxx" level="debug" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+
+		<!--建立一个默认的root的logger-->
+		<Root level="debug">
+			<appender-ref ref="RollingFile"/>
+			<appender-ref ref="Console"/>
+		</Root>
+	</Loggers>
+</Configuration>
+
+

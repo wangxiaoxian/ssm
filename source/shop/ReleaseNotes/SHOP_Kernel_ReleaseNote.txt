@@ -9,3 +9,5 @@ redis-server redis.conf
 3、启动并配置kafka
 ./bin/kafka-server-start.sh ./config/server.properties
 ./config/server.properties增加或修改配置项auto.create.topics.enable=true，使之创建消息的时候可以自动创建topic
+./config/server.properties增加或修改配置项delete.topic.enable=true，使之删除topic时可以自动删除对应目录
+./config/server.properties增加或修改配置项num.partitions=3，指定创建topic时划分为几个分区

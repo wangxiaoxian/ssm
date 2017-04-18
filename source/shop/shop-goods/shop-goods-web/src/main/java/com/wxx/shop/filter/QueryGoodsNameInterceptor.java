@@ -65,8 +65,12 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
     }
 
     private void logQueryParam(String goodsSearchName) {
-        messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader(KafkaHeaders.MESSAGE_KEY, "key")
-                .setHeader(KafkaHeaders.TOPIC, "goods").build());
+        // header中的key值决定对应消息存放在topic的哪个partition中，
+        // key的计算方式实现类默认为org.apache.kafka.clients.producer.internals.DefaultPartitioner
+        for (int i = 0; i < 10; i ++) {
+            messageChannel.send(MessageBuilder.withPayload(goodsSearchName).setHeader(KafkaHeaders.MESSAGE_KEY, "key" + i)
+                    .setHeader(KafkaHeaders.TOPIC, "goods").build());
+        }
     }
 
     private boolean set2Redis(String queryParam, List<Goods> goodsList) {

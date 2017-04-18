@@ -12,8 +12,8 @@
 		<spring.version>4.2.9.RELEASE</spring.version>
 		<mybatis.version>3.3.1</mybatis.version>
 		<redis.version>2.8.2</redis.version>
-		<slf4j.version>1.6.6</slf4j.version>
-		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<log4j2.version>2.7</log4j2.version>
 		<project.deploy.directory>./target</project.deploy.directory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -278,7 +278,7 @@
 		</dependency>
 
 		<!-- 日志文件管理包 -->
-		<!-- log start -->
+		<!-- log start
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -293,6 +293,55 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+-->
+		<!-- slf4j核心包-->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+		<!--Commons Logging桥接-->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!--核心log4j2jar包-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<!--用于与slf4j保持桥接-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<!--web工程需要包含log4j-web，非web工程不需要-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>${log4j2.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!--需要使用log4j2的AsyncLogger需要包含disruptor-->
+		<dependency>
+		     <groupId>com.lmax</groupId>
+		     <artifactId>disruptor</artifactId>
+		     <version>3.2.0</version>
 		</dependency>
 		<!-- log end -->
 
