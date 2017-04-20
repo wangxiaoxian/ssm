@@ -19,6 +19,7 @@
         <property name="testWhileIdle" value="true"></property>  
     </bean>
 
+    <!--单机redis-->
     <!-- redis服务器中心 -->
     <bean id="jedisConnectionFactory" 
         class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
@@ -30,8 +31,7 @@
     	<property name="usePool" value="true"/>
     	<property name="poolConfig" ref="jedisPoolConfig" />
     </bean>
-
-    <!-- redis template definition -->
+    <!-- jedis template -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
         p:connectionFactory-ref="jedisConnectionFactory">
         <property name="keySerializer">
@@ -46,5 +46,14 @@
         <property name="hashValueSerializer">  
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />  
         </property>
+    </bean>
+
+    <!--集群redis-->
+    <bean id="redisClusterService" class="com.wxx.shop.cache.cluster.impl.RedisClusterServiceImpl">
+        <constructor-arg index="0" value="{redisCluster.hostPortList}"/>
+        <constructor-arg index="1" value="{redisCluster.connectionTimeout}"/>
+        <constructor-arg index="2" value="{redisCluster.soTimeout}"/>
+        <constructor-arg index="3" value="{redisCluster.maxRedirections}"/>
+        <constructor-arg index="4" ref="jedisPoolConfig"/>
     </bean>
 </beans>

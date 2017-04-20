@@ -1,5 +1,6 @@
 package com.wxx.shop.filter;
 
+import com.wxx.shop.cache.cluster.RedisClusterService;
 import com.wxx.shop.dao.GoodsDao;
 import com.wxx.shop.constenum.GoodsChannelEnum;
 import com.wxx.shop.model.Goods;
@@ -18,6 +19,7 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import redis.clients.jedis.JedisCluster;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -34,14 +36,13 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
 
     @Autowired
     private GoodsDao goodsDao;
+//    @Autowired
+//    private RedisUtil redisUtil;
     @Autowired
-    private RedisUtil redisUtil;
+    RedisClusterService redisClusterService;
     @Autowired
     @Qualifier(GoodsChannelEnum.GOODS_CHANNEL_PRODUCER)
     private MessageChannel messageChannel;
-
-    @Value("#{redisProp['redis.defaultCacheExpireTime']}")
-    private Long defaultCacheExpireTime; // 缓存默认的过期时间
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -51,14 +52,19 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
 
         logQueryParam(queryParam);
 
-        if (redisUtil.exists(key)) {
+//        if (redisUtil.exists(key)) {
+//            LOGGER.info("找到缓存数据");
+//            return invocation.proceed();
+//        }
+        JedisCluster jedisCluster = redisClusterService.getJedisCluster();
+        if (jedisCluster.exists(key)) {
             LOGGER.info("找到缓存数据");
             return invocation.proceed();
         }
 
         LOGGER.info("根据key={}找不到缓存数据，开始查询数据库", key);
         List<Goods> goodsList = goodsDao.queryByName(queryParam);
-        boolean result = set2Redis(invocation.getArguments()[0].toString(), goodsList);
+        Long result = set2Redis(invocation.getArguments()[0].toString(), goodsList);
         LOGGER.info("缓存设置结果{}", result);
 
         return invocation.proceed();
@@ -73,10 +79,10 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
         }
     }
 
-    private boolean set2Redis(String queryParam, List<Goods> goodsList) {
+    private Long set2Redis(String queryParam, List<Goods> goodsList) {
         if (CollectionUtils.isEmpty(goodsList)) {
             LOGGER.info("数据库找不到查询结果，无法缓存");
-            return true;
+            return 0L;
         }
         StringBuffer value = new StringBuffer();
         for (Goods goods : goodsList) {
@@ -87,7 +93,7 @@ public class QueryGoodsNameInterceptor implements MethodInterceptor {
                     .append(",");
         }
         value.substring(0, value.length() - 1);
-        return redisUtil.set(GoodsServiceImpl.QUERY_GOODS_NAME_KEY_PREFIX + queryParam, value.toString(), EXPIRE_TIME);
+//        return redisUtil.set(GoodsServiceImpl.QUERY_GOODS_NAME_KEY_PREFIX + queryParam, value.toString(), EXPIRE_TIME);
+        return redisClusterService.getJedisCluster().setnx(GoodsServiceImpl.QUERY_GOODS_NAME_KEY_PREFIX + queryParam, value.toString());
     }
-
 }
