@@ -20,12 +20,13 @@ import java.util.Set;
 public class RedisClusterServiceImpl implements RedisClusterService {
 
     private JedisCluster jedisCluster;
+    private String hostPortList;
+    private int connectionTimeout;
+    private int soTimeout;
+    private int maxRedirections;
+    private GenericObjectPoolConfig poolConfig;
 
-    public RedisClusterServiceImpl(String hostPortList,
-                                   int connectionTimeout,
-                                   int soTimeout,
-                                   int maxRedirections,
-                                   final GenericObjectPoolConfig poolConfig) {
+    public void init() {
         Set<HostAndPort> hostPortSet = convert2Set(hostPortList);
         jedisCluster = new JedisCluster(hostPortSet, connectionTimeout, soTimeout, maxRedirections, poolConfig);
     }
@@ -56,7 +57,52 @@ public class RedisClusterServiceImpl implements RedisClusterService {
         return hostAndPort;
     }
 
+    @Override
     public JedisCluster getJedisCluster() {
         return jedisCluster;
+    }
+
+    public void setJedisCluster(JedisCluster jedisCluster) {
+        this.jedisCluster = jedisCluster;
+    }
+
+    public String getHostPortList() {
+        return hostPortList;
+    }
+
+    public void setHostPortList(String hostPortList) {
+        this.hostPortList = hostPortList;
+    }
+
+    public int getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(int connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public int getSoTimeout() {
+        return soTimeout;
+    }
+
+    public void setSoTimeout(int soTimeout) {
+        this.soTimeout = soTimeout;
+    }
+
+    public int getMaxRedirections() {
+        return maxRedirections;
+    }
+
+    public void setMaxRedirections(int maxRedirections) {
+        this.maxRedirections = maxRedirections;
+    }
+
+    public GenericObjectPoolConfig getPoolConfig() {
+        return poolConfig;
+    }
+
+    public void setPoolConfig(GenericObjectPoolConfig poolConfig) {
+        this.poolConfig = poolConfig;
     }
 }

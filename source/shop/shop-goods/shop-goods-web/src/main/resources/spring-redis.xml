@@ -49,11 +49,11 @@
     </bean>
 
     <!--集群redis-->
-    <bean id="redisClusterService" class="com.wxx.shop.cache.cluster.impl.RedisClusterServiceImpl">
-        <constructor-arg index="0" value="{redisCluster.hostPortList}"/>
-        <constructor-arg index="1" value="{redisCluster.connectionTimeout}"/>
-        <constructor-arg index="2" value="{redisCluster.soTimeout}"/>
-        <constructor-arg index="3" value="{redisCluster.maxRedirections}"/>
-        <constructor-arg index="4" ref="jedisPoolConfig"/>
+    <bean id="redisClusterService" class="com.wxx.shop.cache.cluster.impl.RedisClusterServiceImpl" init-method="init">
+        <property name="hostPortList" value="${redisCluster.hostPortList}"></property>
+        <property name="connectionTimeout" value="${redisCluster.connectionTimeout}"></property>
+        <property name="soTimeout" value="${redisCluster.soTimeout}"></property>
+        <property name="maxRedirections" value="${redisCluster.maxRedirections}"></property>
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
     </bean>
 </beans>
