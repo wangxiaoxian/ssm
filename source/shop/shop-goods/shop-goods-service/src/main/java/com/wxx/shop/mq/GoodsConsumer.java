@@ -27,7 +27,7 @@ public class GoodsConsumer implements KafkaConsumer {
     @Qualifier(GoodsChannelEnum.GOODS_CHANNEL_CONSUMER)
     private PollableChannel pollableChannel;
     @Autowired
-    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @PostConstruct
     @Override
